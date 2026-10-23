@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITO 2U - Usuario</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/paneles.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         BARRA SUPERIOR
+    ====================================================== -->
+
+    <header class="barra-superior">
+
+        <div class="marca">
+
+            <img
+                src="{{ url_for('assets', filename='Logo.jpeg') }}"
+                alt="INFINITO 2U"
+            >
+
+            <div>
+
+                <h1>INFINITO 2U</h1>
+
+                <span>
+                    PANEL DE USUARIO
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="usuario-activo">
+
+            <span>
+                👤 Usuario
+            </span>
+
+            <strong>
+                {{ usuario }}
+            </strong>
+
+            <a href="{{ url_for('logout') }}">
+                CERRAR SESIÓN
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="contenido">
+
+
+        <!-- =================================================
+             BIENVENIDA
+        ================================================== -->
+
+        <div class="bienvenida">
+
+            <h2>
+                Bienvenido, {{ usuario }}
+            </h2>
+
+            <p>
+                Consulta la información disponible para ti
+                como residente de INFINITO 2U.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             TARJETAS DEL USUARIO
+        ================================================== -->
+
+        <section class="tarjetas">
+
+
+            <!-- =================================================
+                 MI INFORMACIÓN
+            ================================================== -->
+
+            <a href="{{ url_for('mi_informacion') }}"
+               class="tarjeta perfil">
+
+                <div class="icono">
+                    👤
+                </div>
+
+                <h3>
+                    Mi información
+                </h3>
+
+                <p>
+                    Consulta la información registrada como
+                    residente de INFINITO 2U.
+                </p>
+
+            </a>
+
+
+            <!-- =================================================
+                 MI APARTAMENTO
+            ================================================== -->
+
+            <a href="{{ url_for('mi_apartamento') }}"
+               class="tarjeta apartamento">
+
+                <div class="icono">
+                    🏠
+                </div>
+
+                <h3>
+                    Mi apartamento
+                </h3>
+
+                <p>
+                    Consulta la información correspondiente
+                    a tu apartamento.
+                </p>
+
+            </a>
+
+
+            <!-- =================================================
+                 MANUAL COMPLETO
+            ================================================== -->
+
+            <a href="{{ url_for('manual_completo') }}"
+               class="tarjeta manual-completo">
+
+                <div class="icono">
+                    📚
+                </div>
+
+                <h3>
+                    Manual completo
+                </h3>
+
+                <p>
+                    Consulta toda la información y orientación
+                    disponible en INFINITO 2U.
+                </p>
+
+            </a>
+
+
+            <!-- =================================================
+                 MANUALES
+            ================================================== -->
+
+            <a href="{{ url_for('manuales') }}"
+               class="tarjeta manual">
+
+                <div class="icono">
+                    📖
+                </div>
+
+                <h3>
+                    Manuales
+                </h3>
+
+                <p>
+                    Consulta el manual de convivencia y el
+                    manual jurídico.
+                </p>
+
+            </a>
+
+
+            <!-- =================================================
+                 MANUAL INTERACTIVO
+            ================================================== -->
+
+            <a href="{{ url_for('manual_interactivo') }}"
+               class="tarjeta manual-interactivo">
+
+                <div class="icono">
+                    📘
+                </div>
+
+                <h3>
+                    Manual interactivo
+                </h3>
+
+                <p>
+                    Explora de forma interactiva la información,
+                    orientación y funcionalidades de INFINITO 2U.
+                </p>
+
+            </a>
+
+
+            <!-- =================================================
+                 NORMATIVIDAD
+            ================================================== -->
+
+            <a href="{{ url_for('normatividad') }}"
+               class="tarjeta normatividad">
+
+                <div class="icono">
+                    ⚖️
+                </div>
+
+                <h3>
+                    Normatividad
+                </h3>
+
+                <p>
+                    Consulta leyes, normas y documentos aplicables
+                    a la propiedad horizontal.
+                </p>
+
+            </a>
+
+
+            <!-- =================================================
+                 CÓDIGO QR
+            ================================================== -->
+
+            <a href="{{ url_for('codigo_qr') }}"
+               class="tarjeta qr">
+
+                <div class="icono">
+                    📱
+                </div>
+
+                <h3>
+                    Código QR
+                </h3>
+
+                <p>
+                    Accede al sistema de quejas, reclamos
+                    y solicitudes.
+                </p>
+
+            </a>
+
+
+            <!-- =================================================
+                 CHATBOT
+            ================================================== -->
+
+            <a href="{{ url_for('chatbot') }}"
+               class="tarjeta chatbot">
+
+                <div class="icono">
+                    🤖
+                </div>
+
+                <h3>
+                    Chatbot
+                </h3>
+
+                <p>
+                    Resuelve tus dudas sobre convivencia,
+                    normas y administración.
+                </p>
+
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>

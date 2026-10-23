@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>INFINITO 2U - Mi apartamento</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/paneles.css') }}">
+
+<style>
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+    }
+
+    .contenedor {
+        width: 90%;
+        max-width: 1000px;
+        margin: 30px auto;
+    }
+
+    .encabezado {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,.10);
+        margin-bottom: 25px;
+    }
+
+    .encabezado h1 {
+        margin: 0;
+        color: #1f2937;
+    }
+
+    .usuario {
+        color: #555;
+        font-weight: bold;
+    }
+
+    .boton-volver {
+        display: inline-block;
+        text-decoration: none;
+        background: #374151;
+        color: white;
+        padding: 11px 18px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .tarjeta {
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 5px 15px rgba(0,0,0,.10);
+        margin-bottom: 25px;
+    }
+
+    .titulo {
+        color: #1f2937;
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+
+    .subtitulo {
+        color: #1f2937;
+        margin-top: 30px;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e5e7eb;
+    }
+
+    .datos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .dato {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 16px;
+        border-left: 5px solid #16a34a;
+    }
+
+    .dato strong {
+        display: block;
+        color: #555;
+        margin-bottom: 7px;
+    }
+
+    .dato span {
+        color: #111827;
+        font-size: 16px;
+    }
+
+    .vehiculo {
+        border-left-color: #2563eb;
+    }
+
+    .vehiculo strong {
+        color: #374151;
+    }
+
+    .seccion-vehiculo {
+        margin-top: 30px;
+        padding-top: 10px;
+    }
+
+    .encabezado-vehiculo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .encabezado-vehiculo h3 {
+        margin: 0;
+        color: #1f2937;
+    }
+
+    .acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .boton {
+        border: none;
+        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 14px;
+        display: inline-block;
+    }
+
+    .agregar {
+        background: #16a34a;
+    }
+
+    .editar {
+        background: #2563eb;
+    }
+
+    .eliminar {
+        background: #dc2626;
+    }
+
+    .cancelar {
+        background: #6b7280;
+    }
+
+    form {
+        margin: 0;
+    }
+
+    .formulario {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .campo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .campo label {
+        font-weight: bold;
+        margin-bottom: 7px;
+        color: #374151;
+    }
+
+    .campo input,
+    .campo select {
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        font-size: 15px;
+        outline: none;
+        background: white;
+    }
+
+    .campo input:focus,
+    .campo select:focus {
+        border-color: #16a34a;
+    }
+
+    .separador-vehiculo {
+        grid-column: 1 / -1;
+        margin-top: 15px;
+        padding: 14px 16px;
+        background: #eff6ff;
+        border-radius: 10px;
+        color: #1e40af;
+        font-weight: bold;
+        border-left: 5px solid #2563eb;
+    }
+
+    .alertas {
+        margin-bottom: 20px;
+    }
+
+    .alerta {
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .success {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .error {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .info {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+
+    .sin-apartamento {
+        text-align: center;
+        padding: 35px;
+    }
+
+    .sin-apartamento h2 {
+        color: #374151;
+    }
+
+    .sin-apartamento p {
+        color: #6b7280;
+    }
+
+    @media (max-width: 700px) {
+
+        .datos,
+        .formulario {
+            grid-template-columns: 1fr;
+        }
+
+        .encabezado {
+            flex-direction: column;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .separador-vehiculo {
+            grid-column: 1;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+```
+<div class="encabezado">
+
+    <h1>🏠 Mi apartamento</h1>
+
+    <div class="usuario">
+        Usuario: {{ usuario }}
+    </div>
+
+</div>
+
+
+<a href="{{ url_for('panel_residente') }}"
+   class="boton-volver">
+
+    ⬅️ Volver al panel
+
+</a>
+
+
+{% with mensajes = get_flashed_messages(with_categories=true) %}
+
+    {% if mensajes %}
+
+        <div class="alertas">
+
+            {% for categoria, mensaje in mensajes %}
+
+                <div class="alerta {{ categoria }}">
+                    {{ mensaje }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+{% if modo == "agregar" %}
+
+    <div class="tarjeta">
+
+        <h2 class="titulo">
+            ➕ Registrar mi apartamento
+        </h2>
+
+        <form method="POST"
+              action="{{ url_for('agregar_mi_apartamento') }}">
+
+            <div class="formulario">
+
+                <div class="campo">
+
+                    <label>Número de apartamento *</label>
+
+                    <input type="text"
+                           name="apartamento"
+                           required
+                           placeholder="Ej: 101">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Bloque</label>
+
+                    <input type="text"
+                           name="bloque"
+                           placeholder="Ej: Bloque 1">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Piso</label>
+
+                    <input type="text"
+                           name="piso"
+                           placeholder="Ej: 1">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Propietario</label>
+
+                    <input type="text"
+                           name="propietario"
+                           value="{{ residente.nombre }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Residente</label>
+
+                    <input type="text"
+                           name="residente"
+                           value="{{ residente.nombre }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Área (m²)</label>
+
+                    <input type="number"
+                           step="0.01"
+                           name="area"
+                           placeholder="Ej: 65.5">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Habitaciones</label>
+
+                    <input type="number"
+                           min="0"
+                           name="habitaciones"
+                           placeholder="Ej: 3">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Parqueadero</label>
+
+                    <input type="text"
+                           name="parqueadero"
+                           placeholder="Ej: P-101">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Estado</label>
+
+                    <select name="estado">
+
+                        <option value="Ocupado">
+                            Ocupado
+                        </option>
+
+                        <option value="Disponible">
+                            Disponible
+                        </option>
+
+                        <option value="En mantenimiento">
+                            En mantenimiento
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="separador-vehiculo">
+                    🚗 Información del vehículo
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Tipo de vehículo</label>
+
+                    <select name="vehiculo_tipo">
+
+                        <option value="">
+                            Seleccione
+                        </option>
+
+                        <option value="Automóvil">
+                            Automóvil
+                        </option>
+
+                        <option value="Motocicleta">
+                            Motocicleta
+                        </option>
+
+                        <option value="Camioneta">
+                            Camioneta
+                        </option>
+
+                        <option value="Campero">
+                            Campero
+                        </option>
+
+                        <option value="Otro">
+                            Otro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Color</label>
+
+                    <input type="text"
+                           name="vehiculo_color"
+                           placeholder="Ej: Blanco">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Placa</label>
+
+                    <input type="text"
+                           name="vehiculo_placa"
+                           placeholder="Ej: ABC123"
+                           maxlength="10"
+                           style="text-transform: uppercase;">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Cilindraje</label>
+
+                    <input type="text"
+                           name="vehiculo_cilindraje"
+                           placeholder="Ej: 1500 cc">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>SOAT</label>
+
+                    <input type="text"
+                           name="vehiculo_soat"
+                           placeholder="Ej: Vigente">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Propietario del vehículo</label>
+
+                    <input type="text"
+                           name="vehiculo_propietario"
+                           value="{{ residente.nombre }}"
+                           placeholder="Nombre del propietario">
+
+                </div>
+
+            </div>
+
+
+            <div class="acciones">
+
+                <button type="submit"
+                        class="boton agregar">
+
+                    💾 Guardar apartamento
+
+                </button>
+
+
+                <a href="{{ url_for('mi_apartamento') }}"
+                   class="boton cancelar">
+
+                    ❌ Cancelar
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+{% elif modo == "editar" %}
+
+    <div class="tarjeta">
+
+        <h2 class="titulo">
+            ✏️ Editar mi apartamento
+        </h2>
+
+        <form method="POST"
+              action="{{ url_for('editar_mi_apartamento') }}">
+
+            <div class="formulario">
+
+                <div class="campo">
+
+                    <label>Número de apartamento *</label>
+
+                    <input type="text"
+                           name="apartamento"
+                           required
+                           value="{{ apartamento.numero or '' }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Bloque</label>
+
+                    <input type="text"
+                           name="bloque"
+                           value="{{ apartamento.bloque or '' }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Piso</label>
+
+                    <input type="text"
+                           name="piso"
+                           value="{{ apartamento.piso or '' }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Propietario</label>
+
+                    <input type="text"
+                           name="propietario"
+                           value="{{ apartamento.propietario or '' }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Residente</label>
+
+                    <input type="text"
+                           name="residente"
+                           value="{{ apartamento.residente or residente.nombre }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Área (m²)</label>
+
+                    <input type="number"
+                           step="0.01"
+                           name="area"
+                           value="{{ apartamento.area or '' }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Habitaciones</label>
+
+                    <input type="number"
+                           min="0"
+                           name="habitaciones"
+                           value="{{ apartamento.habitaciones or '' }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Parqueadero</label>
+
+                    <input type="text"
+                           name="parqueadero"
+                           value="{{ apartamento.parqueadero or '' }}">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Estado</label>
+
+                    <select name="estado">
+
+                        <option value="Ocupado"
+                            {% if apartamento.estado == "Ocupado" %}selected{% endif %}>
+
+                            Ocupado
+
+                        </option>
+
+                        <option value="Disponible"
+                            {% if apartamento.estado == "Disponible" %}selected{% endif %}>
+
+                            Disponible
+
+                        </option>
+
+                        <option value="En mantenimiento"
+                            {% if apartamento.estado == "En mantenimiento" %}selected{% endif %}>
+
+                            En mantenimiento
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="separador-vehiculo">
+                    🚗 Información del vehículo
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Tipo de vehículo</label>
+
+                    <select name="vehiculo_tipo">
+
+                        <option value="">
+                            Seleccione
+                        </option>
+
+                        <option value="Automóvil"
+                            {% if apartamento.vehiculo_tipo == "Automóvil" %}selected{% endif %}>
+
+                            Automóvil
+
+                        </option>
+
+                        <option value="Motocicleta"
+                            {% if apartamento.vehiculo_tipo == "Motocicleta" %}selected{% endif %}>
+
+                            Motocicleta
+
+                        </option>
+
+                        <option value="Camioneta"
+                            {% if apartamento.vehiculo_tipo == "Camioneta" %}selected{% endif %}>
+
+                            Camioneta
+
+                        </option>
+
+                        <option value="Campero"
+                            {% if apartamento.vehiculo_tipo == "Campero" %}selected{% endif %}>
+
+                            Campero
+
+                        </option>
+
+                        <option value="Otro"
+                            {% if apartamento.vehiculo_tipo == "Otro" %}selected{% endif %}>
+
+                            Otro
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Color</label>
+
+                    <input type="text"
+                           name="vehiculo_color"
+                           value="{{ apartamento.vehiculo_color or '' }}"
+                           placeholder="Ej: Blanco">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Placa</label>
+
+                    <input type="text"
+                           name="vehiculo_placa"
+                           value="{{ apartamento.vehiculo_placa or '' }}"
+                           maxlength="10"
+                           style="text-transform: uppercase;">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Cilindraje</label>
+
+                    <input type="text"
+                           name="vehiculo_cilindraje"
+                           value="{{ apartamento.vehiculo_cilindraje or '' }}"
+                           placeholder="Ej: 1500 cc">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>SOAT</label>
+
+                    <input type="text"
+                           name="vehiculo_soat"
+                           value="{{ apartamento.vehiculo_soat or '' }}"
+                           placeholder="Ej: Vigente">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Propietario del vehículo</label>
+
+                    <input type="text"
+                           name="vehiculo_propietario"
+                           value="{{ apartamento.vehiculo_propietario or residente.nombre }}"
+                           placeholder="Nombre del propietario">
+
+                </div>
+
+            </div>
+
+
+            <div class="acciones">
+
+                <button type="submit"
+                        class="boton editar">
+
+                    💾 Guardar cambios
+
+                </button>
+
+
+                <a href="{{ url_for('mi_apartamento') }}"
+                   class="boton cancelar">
+
+                    ❌ Cancelar
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+{% elif apartamento %}
+
+    <div class="tarjeta">
+
+        <h2 class="titulo">
+            Información de mi apartamento
+        </h2>
+
+
+        <div class="datos">
+
+            <div class="dato">
+
+                <strong>Número</strong>
+
+                <span>
+                    {{ apartamento.numero }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Bloque</strong>
+
+                <span>
+                    {{ apartamento.bloque or "No registrado" }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Piso</strong>
+
+                <span>
+                    {{ apartamento.piso or "No registrado" }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Propietario</strong>
+
+                <span>
+                    {{ apartamento.propietario or "No registrado" }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Residente</strong>
+
+                <span>
+                    {{ apartamento.residente or "No registrado" }}
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Área</strong>
+
+                <span>
+
+                    {% if apartamento.area %}
+
+                        {{ apartamento.area }} m²
+
+                    {% else %}
+
+                        No registrada
+
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Habitaciones</strong>
+
+                <span>
+
+                    {{ apartamento.habitaciones or "No registradas" }}
+
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Parqueadero</strong>
+
+                <span>
+
+                    {{ apartamento.parqueadero or "No registrado" }}
+
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>Estado</strong>
+
+                <span>
+
+                    {{ apartamento.estado or "No registrado" }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="seccion-vehiculo">
+
+            <div class="encabezado-vehiculo">
+
+                <h3>
+                    🚗 Información del vehículo
+                </h3>
+
+            </div>
+
+
+            <div class="datos">
+
+                <div class="dato vehiculo">
+
+                    <strong>Tipo de vehículo</strong>
+
+                    <span>
+                        {{ apartamento.vehiculo_tipo or "No registrado" }}
+                    </span>
+
+                </div>
+
+
+                <div class="dato vehiculo">
+
+                    <strong>Color</strong>
+
+                    <span>
+                        {{ apartamento.vehiculo_color or "No registrado" }}
+                    </span>
+
+                </div>
+
+
+                <div class="dato vehiculo">
+
+                    <strong>Placa</strong>
+
+                    <span>
+                        {{ apartamento.vehiculo_placa or "No registrada" }}
+                    </span>
+
+                </div>
+
+
+                <div class="dato vehiculo">
+
+                    <strong>Cilindraje</strong>
+
+                    <span>
+                        {{ apartamento.vehiculo_cilindraje or "No registrado" }}
+                    </span>
+
+                </div>
+
+
+                <div class="dato vehiculo">
+
+                    <strong>SOAT</strong>
+
+                    <span>
+                        {{ apartamento.vehiculo_soat or "No registrado" }}
+                    </span>
+
+                </div>
+
+
+                <div class="dato vehiculo">
+
+                    <strong>Propietario del vehículo</strong>
+
+                    <span>
+                        {{ apartamento.vehiculo_propietario or "No registrado" }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="acciones">
+
+            <a href="{{ url_for('editar_mi_apartamento') }}"
+               class="boton editar">
+
+                ✏️ Editar apartamento
+
+            </a>
+
+
+            <form method="POST"
+                  action="{{ url_for('eliminar_mi_apartamento') }}"
+                  onsubmit="return confirm('¿Seguro que deseas eliminar este apartamento?');">
+
+                <button type="submit"
+                        class="boton eliminar">
+
+                    🗑️ Eliminar apartamento
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+{% else %}
+
+    <div class="tarjeta sin-apartamento">
+
+        <h2>
+            🏠 No tienes un apartamento asociado
+        </h2>
+
+        <p>
+            Puedes registrar la información de tu apartamento.
+        </p>
+
+
+        <div class="acciones"
+             style="justify-content:center;">
+
+            <a href="{{ url_for('agregar_mi_apartamento') }}"
+               class="boton agregar">
+
+                ➕ Agregar apartamento
+
+            </a>
+
+        </div>
+
+    </div>
+
+{% endif %}
+```
+
+</div>
+
+</body>
+
+</html>

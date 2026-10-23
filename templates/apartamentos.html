@@ -1,0 +1,1201 @@
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITO 2U - Apartamentos</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #F4F6F8;
+            color: #1E3A5F;
+        }
+
+        .barra-superior {
+            background: #1E3A5F;
+            color: white;
+            min-height: 90px;
+            padding: 15px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .marca {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .marca img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .marca h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .marca span {
+            font-size: 12px;
+            opacity: 0.85;
+        }
+
+        .usuario-activo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .usuario-activo a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 9px 14px;
+            border-radius: 7px;
+        }
+
+        .usuario-activo a:hover {
+            background: white;
+            color: #1E3A5F;
+        }
+
+        .contenido {
+            width: 95%;
+            max-width: 1450px;
+            margin: 30px auto;
+        }
+
+        .encabezado {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .encabezado h2 {
+            margin: 0 0 8px 0;
+            font-size: 27px;
+        }
+
+        .encabezado p {
+            margin: 0;
+            color: #666;
+        }
+
+        .acciones {
+            margin-top: 18px;
+        }
+
+        .boton-volver {
+            display: inline-block;
+            text-decoration: none;
+            background: #1E3A5F;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .boton-volver:hover {
+            background: #17324F;
+        }
+
+        .mensajes {
+            margin-bottom: 20px;
+        }
+
+        .mensaje {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border-left: 5px solid #3A9D5D;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .panel-formulario {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .panel-formulario h3 {
+            margin-top: 0;
+            color: #3A9D5D;
+        }
+
+        .subtitulo-vehiculo {
+            grid-column: 1 / -1;
+            margin-top: 8px;
+            padding: 12px 15px;
+            background: #F1F7F3;
+            border-left: 5px solid #3A9D5D;
+            border-radius: 8px;
+            color: #2F824C;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .campo input,
+        .campo select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #CDD4DA;
+            border-radius: 7px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .campo input:focus,
+        .campo select:focus {
+            outline: none;
+            border-color: #2878B5;
+        }
+
+        .campo-completo {
+            grid-column: 1 / -1;
+        }
+
+        .boton-guardar {
+            border: none;
+            background: #3A9D5D;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .boton-guardar:hover {
+            background: #2F824C;
+        }
+
+        .panel-tabla {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        .panel-tabla h3 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1250px;
+        }
+
+        th {
+            background: #1E3A5F;
+            color: white;
+            padding: 13px 10px;
+            text-align: left;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #E1E5E8;
+            font-size: 14px;
+        }
+
+        tr:hover td {
+            background: #F7F9FA;
+        }
+
+        .acciones-tabla {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .boton-editar {
+            border: none;
+            background: #2878B5;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .boton-editar:hover {
+            background: #1F6295;
+        }
+
+        .boton-eliminar {
+            border: none;
+            background: #C94C4C;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .boton-eliminar:hover {
+            background: #A93E3E;
+        }
+
+        .vehiculo-info {
+            line-height: 1.6;
+            min-width: 180px;
+        }
+
+        .vehiculo-info strong {
+            color: #1E3A5F;
+        }
+
+        #formEdicion {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid #2878B5;
+        }
+
+        #formEdicion.mostrar {
+            display: block;
+        }
+
+        #formEdicion h3 {
+            margin-top: 0;
+            color: #2878B5;
+        }
+
+        .subtitulo-edicion {
+            grid-column: 1 / -1;
+            margin-top: 8px;
+            padding: 12px 15px;
+            background: #EEF5FA;
+            border-left: 5px solid #2878B5;
+            border-radius: 8px;
+            color: #1F6295;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .botones-edicion {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .boton-cancelar {
+            border: none;
+            background: #777;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .boton-cancelar:hover {
+            background: #555;
+        }
+
+        .sin-registros {
+            text-align: center;
+            padding: 35px;
+            color: #777;
+            font-style: italic;
+        }
+
+        @media (max-width: 1000px) {
+
+            .formulario {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .barra-superior {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .usuario-activo {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .contenido {
+                width: 92%;
+            }
+
+            .formulario {
+                grid-template-columns: 1fr;
+            }
+
+            .campo-completo,
+            .subtitulo-vehiculo,
+            .subtitulo-edicion {
+                grid-column: auto;
+            }
+
+            .barra-superior {
+                padding: 15px 20px;
+            }
+
+            .marca h1 {
+                font-size: 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="barra-superior">
+
+    <div class="marca">
+
+        <img
+            src="{{ url_for('assets', filename='Logo.jpeg') }}"
+            alt="INFINITO 2U"
+        >
+
+        <div>
+
+            <h1>INFINITO 2U</h1>
+
+            <span>
+                GESTIÓN DE APARTAMENTOS
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="usuario-activo">
+
+        <span>👤 Administrador</span>
+
+        <strong>
+            {{ usuario }}
+        </strong>
+
+        <a href="{{ url_for('logout') }}">
+            CERRAR SESIÓN
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="contenido">
+
+
+<section class="encabezado">
+
+    <h2>
+        Gestión de Apartamentos
+    </h2>
+
+    <p>
+        Administre la información de los apartamentos
+        de la propiedad horizontal.
+    </p>
+
+    <div class="acciones">
+
+        <a
+            href="{{ url_for('panel_admin') }}"
+            class="boton-volver"
+        >
+            ← VOLVER AL PANEL
+        </a>
+
+    </div>
+
+</section>
+
+
+{% with mensajes = get_flashed_messages() %}
+
+    {% if mensajes %}
+
+        <div class="mensajes">
+
+            {% for mensaje in mensajes %}
+
+                <div class="mensaje">
+                    {{ mensaje }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<section class="panel-formulario">
+
+    <h3>
+        ➕ Agregar apartamento
+    </h3>
+
+
+    <form
+        action="{{ url_for('agregar_apartamento') }}"
+        method="POST"
+        class="formulario"
+    >
+
+        <div class="campo">
+
+            <label for="numero">
+                Número de apartamento *
+            </label>
+
+            <input
+                type="text"
+                id="numero"
+                name="numero"
+                placeholder="Ej: 101"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="bloque">
+                Bloque
+            </label>
+
+            <input
+                type="text"
+                id="bloque"
+                name="bloque"
+                placeholder="Ej: A"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="piso">
+                Piso
+            </label>
+
+            <input
+                type="text"
+                id="piso"
+                name="piso"
+                placeholder="Ej: 1"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="propietario">
+                Propietario
+            </label>
+
+            <input
+                type="text"
+                id="propietario"
+                name="propietario"
+                placeholder="Nombre del propietario"
+            >
+
+        </div>
+
+
+        <div class="subtitulo-vehiculo">
+            🚗 Información del vehículo
+        </div>
+
+
+        <div class="campo">
+
+            <label for="vehiculo_tipo">
+                Tipo
+            </label>
+
+            <select
+                id="vehiculo_tipo"
+                name="vehiculo_tipo"
+            >
+
+                <option value="">
+                    Seleccione
+                </option>
+
+                <option value="Automóvil">
+                    Automóvil
+                </option>
+
+                <option value="Motocicleta">
+                    Motocicleta
+                </option>
+
+                <option value="Camioneta">
+                    Camioneta
+                </option>
+
+                <option value="Campero">
+                    Campero
+                </option>
+
+                <option value="Otro">
+                    Otro
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="vehiculo_color">
+                Color
+            </label>
+
+            <input
+                type="text"
+                id="vehiculo_color"
+                name="vehiculo_color"
+                placeholder="Ej: Blanco"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="vehiculo_placa">
+                Placa
+            </label>
+
+            <input
+                type="text"
+                id="vehiculo_placa"
+                name="vehiculo_placa"
+                placeholder="Ej: ABC123"
+                maxlength="10"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="vehiculo_cilindraje">
+                Cilindraje
+            </label>
+
+            <input
+                type="text"
+                id="vehiculo_cilindraje"
+                name="vehiculo_cilindraje"
+                placeholder="Ej: 1600 cc"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="vehiculo_soat">
+                SOAT
+            </label>
+
+            <input
+                type="text"
+                id="vehiculo_soat"
+                name="vehiculo_soat"
+                placeholder="Ej: Vigente / 15-08-2027"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="vehiculo_propietario">
+                Propietario del vehículo
+            </label>
+
+            <input
+                type="text"
+                id="vehiculo_propietario"
+                name="vehiculo_propietario"
+                placeholder="Nombre del propietario"
+            >
+
+        </div>
+
+
+        <div class="campo campo-completo">
+
+            <button
+                type="submit"
+                class="boton-guardar"
+            >
+                GUARDAR APARTAMENTO
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+<section class="panel-tabla">
+
+    <h3>
+        🏢 Apartamentos registrados
+    </h3>
+
+
+    {% if apartamentos %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>APARTAMENTO</th>
+
+                    <th>BLOQUE</th>
+
+                    <th>PISO</th>
+
+                    <th>PROPIETARIO</th>
+
+                    <th>VEHÍCULO</th>
+
+                    <th>COLOR</th>
+
+                    <th>PLACA</th>
+
+                    <th>CILINDRAJE</th>
+
+                    <th>SOAT</th>
+
+                    <th>PROPIETARIO VEHÍCULO</th>
+
+                    <th>ACCIONES</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for apartamento in apartamentos %}
+
+                <tr>
+
+                    <td>
+                        {{ apartamento['id_apartamento'] }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ apartamento['numero'] or '—' }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ apartamento['bloque'] or '—' }}
+                    </td>
+
+                    <td>
+                        {{ apartamento['piso'] or '—' }}
+                    </td>
+
+                    <td>
+                        {{ apartamento['propietario'] or '—' }}
+                    </td>
+
+                    <td>
+                        {{ apartamento['vehiculo_tipo'] or '—' }}
+                    </td>
+
+                    <td>
+                        {{ apartamento['vehiculo_color'] or '—' }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ apartamento['vehiculo_placa'] or '—' }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ apartamento['vehiculo_cilindraje'] or '—' }}
+                    </td>
+
+                    <td>
+                        {{ apartamento['vehiculo_soat'] or '—' }}
+                    </td>
+
+                    <td>
+                        {{ apartamento['vehiculo_propietario'] or '—' }}
+                    </td>
+
+                    <td>
+
+                        <div class="acciones-tabla">
+
+                            <button
+                                type="button"
+                                class="boton-editar"
+                                onclick="mostrarEdicion(this)"
+                                data-id="{{ apartamento['id_apartamento'] }}"
+                                data-numero="{{ apartamento['numero'] or '' }}"
+                                data-bloque="{{ apartamento['bloque'] or '' }}"
+                                data-piso="{{ apartamento['piso'] or '' }}"
+                                data-propietario="{{ apartamento['propietario'] or '' }}"
+                                data-vehiculo-tipo="{{ apartamento['vehiculo_tipo'] or '' }}"
+                                data-vehiculo-color="{{ apartamento['vehiculo_color'] or '' }}"
+                                data-vehiculo-placa="{{ apartamento['vehiculo_placa'] or '' }}"
+                                data-vehiculo-cilindraje="{{ apartamento['vehiculo_cilindraje'] or '' }}"
+                                data-vehiculo-soat="{{ apartamento['vehiculo_soat'] or '' }}"
+                                data-vehiculo-propietario="{{ apartamento['vehiculo_propietario'] or '' }}"
+                            >
+                                EDITAR
+                            </button>
+
+
+                            <form
+                                action="{{ url_for(
+                                    'eliminar_apartamento',
+                                    id_apartamento=apartamento['id_apartamento']
+                                ) }}"
+                                method="POST"
+                                style="display:inline;"
+                                onsubmit="return confirmarEliminacion();"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="boton-eliminar"
+                                >
+                                    ELIMINAR
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    {% else %}
+
+        <div class="sin-registros">
+
+            No hay apartamentos registrados.
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<section id="formEdicion">
+
+    <h3>
+        ✏️ Editar apartamento
+    </h3>
+
+
+    <form
+        id="formularioEdicion"
+        method="POST"
+        class="formulario"
+    >
+
+        <div class="campo">
+
+            <label for="editarNumero">
+                Número de apartamento *
+            </label>
+
+            <input
+                type="text"
+                id="editarNumero"
+                name="numero"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarBloque">
+                Bloque
+            </label>
+
+            <input
+                type="text"
+                id="editarBloque"
+                name="bloque"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarPiso">
+                Piso
+            </label>
+
+            <input
+                type="text"
+                id="editarPiso"
+                name="piso"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarPropietario">
+                Propietario
+            </label>
+
+            <input
+                type="text"
+                id="editarPropietario"
+                name="propietario"
+            >
+
+        </div>
+
+
+        <div class="subtitulo-edicion">
+            🚗 Información del vehículo
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarVehiculoTipo">
+                Tipo
+            </label>
+
+            <select
+                id="editarVehiculoTipo"
+                name="vehiculo_tipo"
+            >
+
+                <option value="">
+                    Seleccione
+                </option>
+
+                <option value="Automóvil">
+                    Automóvil
+                </option>
+
+                <option value="Motocicleta">
+                    Motocicleta
+                </option>
+
+                <option value="Camioneta">
+                    Camioneta
+                </option>
+
+                <option value="Campero">
+                    Campero
+                </option>
+
+                <option value="Otro">
+                    Otro
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarVehiculoColor">
+                Color
+            </label>
+
+            <input
+                type="text"
+                id="editarVehiculoColor"
+                name="vehiculo_color"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarVehiculoPlaca">
+                Placa
+            </label>
+
+            <input
+                type="text"
+                id="editarVehiculoPlaca"
+                name="vehiculo_placa"
+                maxlength="10"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarVehiculoCilindraje">
+                Cilindraje
+            </label>
+
+            <input
+                type="text"
+                id="editarVehiculoCilindraje"
+                name="vehiculo_cilindraje"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarVehiculoSoat">
+                SOAT
+            </label>
+
+            <input
+                type="text"
+                id="editarVehiculoSoat"
+                name="vehiculo_soat"
+                placeholder="Ej: Vigente / 15-08-2027"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="editarVehiculoPropietario">
+                Propietario del vehículo
+            </label>
+
+            <input
+                type="text"
+                id="editarVehiculoPropietario"
+                name="vehiculo_propietario"
+            >
+
+        </div>
+
+
+        <div class="campo campo-completo">
+
+            <div class="botones-edicion">
+
+                <button
+                    type="submit"
+                    class="boton-guardar"
+                >
+                    GUARDAR CAMBIOS
+                </button>
+
+                <button
+                    type="button"
+                    class="boton-cancelar"
+                    onclick="cerrarEdicion()"
+                >
+                    CANCELAR
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+</main>
+
+
+<script>
+
+function mostrarEdicion(boton) {
+
+    const id = boton.dataset.id;
+
+    document.getElementById(
+        "editarNumero"
+    ).value = boton.dataset.numero || "";
+
+    document.getElementById(
+        "editarBloque"
+    ).value = boton.dataset.bloque || "";
+
+    document.getElementById(
+        "editarPiso"
+    ).value = boton.dataset.piso || "";
+
+    document.getElementById(
+        "editarPropietario"
+    ).value = boton.dataset.propietario || "";
+
+    document.getElementById(
+        "editarVehiculoTipo"
+    ).value = boton.dataset.vehiculoTipo || "";
+
+    document.getElementById(
+        "editarVehiculoColor"
+    ).value = boton.dataset.vehiculoColor || "";
+
+    document.getElementById(
+        "editarVehiculoPlaca"
+    ).value = boton.dataset.vehiculoPlaca || "";
+
+    document.getElementById(
+        "editarVehiculoCilindraje"
+    ).value = boton.dataset.vehiculoCilindraje || "";
+
+    document.getElementById(
+        "editarVehiculoSoat"
+    ).value = boton.dataset.vehiculoSoat || "";
+
+    document.getElementById(
+        "editarVehiculoPropietario"
+    ).value = boton.dataset.vehiculoPropietario || "";
+
+
+    const formulario =
+        document.getElementById(
+            "formularioEdicion"
+        );
+
+
+    formulario.action =
+        "/apartamentos/editar/" +
+        encodeURIComponent(id);
+
+
+    document.getElementById(
+        "formEdicion"
+    ).classList.add("mostrar");
+
+
+    document.getElementById(
+        "formEdicion"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+function cerrarEdicion() {
+
+    document.getElementById(
+        "formEdicion"
+    ).classList.remove("mostrar");
+
+}
+
+
+function confirmarEliminacion() {
+
+    return confirm(
+        "¿Está seguro de eliminar este apartamento?"
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>

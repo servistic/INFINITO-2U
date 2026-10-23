@@ -1,0 +1,9 @@
+infinito2u.db
+*.db
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+.git

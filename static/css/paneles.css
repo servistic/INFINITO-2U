@@ -1,0 +1,362 @@
+/* ============================================================
+   INFINITO 2U
+   ESTILOS DE LOS PANELES
+============================================================ */
+
+
+/* ============================================================
+   CONFIGURACIÓN GENERAL
+============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f4f7fb;
+
+    color: #1f2937;
+
+    min-height: 100vh;
+}
+
+
+/* ============================================================
+   BARRA SUPERIOR
+============================================================ */
+
+.barra-superior {
+
+    width: 100%;
+
+    min-height: 85px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 12px 35px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ============================================================
+   MARCA
+============================================================ */
+
+.marca {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.marca img {
+
+    width: 58px;
+
+    height: 58px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+}
+
+
+.marca h1 {
+
+    font-size: 24px;
+
+    color: #17365d;
+
+    margin-bottom: 4px;
+}
+
+
+.marca span {
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   USUARIO ACTIVO
+============================================================ */
+
+.usuario-activo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.usuario-activo span {
+
+    font-size: 14px;
+
+    color: #555;
+}
+
+
+.usuario-activo strong {
+
+    color: #17365d;
+}
+
+
+.usuario-activo a {
+
+    text-decoration: none;
+
+    background: #17365d;
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.usuario-activo a:hover {
+
+    opacity: 0.85;
+}
+
+
+/* ============================================================
+   CONTENIDO
+============================================================ */
+
+.contenido {
+
+    width: 92%;
+
+    max-width: 1250px;
+
+    margin: 35px auto;
+}
+
+
+/* ============================================================
+   BIENVENIDA
+============================================================ */
+
+.bienvenida {
+
+    margin-bottom: 30px;
+}
+
+
+.bienvenida h2 {
+
+    font-size: 28px;
+
+    color: #17365d;
+
+    margin-bottom: 7px;
+}
+
+
+.bienvenida p {
+
+    color: #6b7280;
+
+    font-size: 15px;
+}
+
+
+/* ============================================================
+   TARJETAS
+============================================================ */
+
+.tarjetas {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 22px;
+}
+
+
+.tarjeta {
+
+    min-height: 190px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tarjeta:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.14);
+}
+
+
+/* ============================================================
+   ICONOS
+============================================================ */
+
+.icono {
+
+    font-size: 38px;
+
+    margin-bottom: 15px;
+}
+
+
+/* ============================================================
+   TEXTO DE LAS TARJETAS
+============================================================ */
+
+.tarjeta h3 {
+
+    color: #17365d;
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+}
+
+
+.tarjeta p {
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   COLORES DE LAS TARJETAS
+============================================================ */
+
+.perfil {
+
+    border-top: 5px solid #3b82f6;
+}
+
+
+.pagos {
+
+    border-top: 5px solid #10b981;
+}
+
+
+.cuotas {
+
+    border-top: 5px solid #f59e0b;
+}
+
+
+.manual {
+
+    border-top: 5px solid #ec4899;
+}
+
+
+.normatividad {
+
+    border-top: 5px solid #6366f1;
+}
+
+
+.qr {
+
+    border-top: 5px solid #14b8a6;
+}
+
+
+.chatbot {
+
+    border-top: 5px solid #7c3aed;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 750px) {
+
+    .barra-superior {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 18px;
+    }
+
+
+    .usuario-activo {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .contenido {
+
+        width: 94%;
+    }
+
+
+    .bienvenida h2 {
+
+        font-size: 23px;
+    }
+
+}

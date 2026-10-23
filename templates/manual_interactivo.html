@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Manual Interactivo - INFINITO 2U</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #F4F7FC;
+        color: #1E293B;
+        min-height: 100vh;
+    }
+
+    /* =====================================================
+       ESTRUCTURA GENERAL
+    ===================================================== */
+
+    .app {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* =====================================================
+       MENU LATERAL
+    ===================================================== */
+
+    .sidebar {
+        width: 270px;
+        background: #172554;
+        color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 3px 0 12px rgba(0,0,0,0.12);
+    }
+
+    .logo-area {
+        text-align: center;
+        padding: 28px 15px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .logo-symbol {
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
+
+    .logo-name {
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .logo-subtitle {
+        font-size: 13px;
+        margin-top: 5px;
+        color: #CBD5E1;
+    }
+
+    .menu {
+        padding: 15px 10px;
+    }
+
+    .menu-title {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #94A3B8;
+        padding: 8px 12px;
+        letter-spacing: 1px;
+    }
+
+    .menu-button {
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: white;
+        padding: 13px 14px;
+        margin: 3px 0;
+        border-radius: 9px;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.2s ease;
+    }
+
+    .menu-button:hover {
+        background: rgba(255,255,255,0.12);
+        transform: translateX(3px);
+    }
+
+    .menu-button.active {
+        background: #2563EB;
+    }
+
+    .menu-button.morado:hover {
+        background: #7C3AED;
+    }
+
+    .menu-button.verde:hover {
+        background: #16A34A;
+    }
+
+    .menu-button.naranja:hover {
+        background: #F59E0B;
+    }
+
+    .menu-button.turquesa:hover {
+        background: #0891B2;
+    }
+
+    .menu-button.rojo:hover {
+        background: #DC2626;
+    }
+
+    .sidebar-bottom {
+        padding: 20px 12px;
+        border-top: 1px solid rgba(255,255,255,0.15);
+        margin-top: 10px;
+    }
+
+    .sidebar-brand {
+        text-align: center;
+        font-size: 13px;
+        color: #CBD5E1;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+
+    .back-panel {
+        display: block;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        background: white;
+        color: #172554;
+        padding: 11px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 13px;
+        transition: 0.2s;
+    }
+
+    .back-panel:hover {
+        background: #E8F0FF;
+    }
+
+    /* =====================================================
+       CONTENIDO
+    ===================================================== */
+
+    .main {
+        margin-left: 270px;
+        width: calc(100% - 270px);
+        min-height: 100vh;
+    }
+
+    .header {
+        background: white;
+        min-height: 76px;
+        padding: 14px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #D9E2F2;
+        position: sticky;
+        top: 0;
+        z-index: 900;
+    }
+
+    .header-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .header-icon {
+        font-size: 30px;
+    }
+
+    .header-title h1 {
+        font-size: 21px;
+        color: #172554;
+    }
+
+    .header-title p {
+        font-size: 12px;
+        color: #64748B;
+        margin-top: 3px;
+    }
+
+    .header-back {
+        text-decoration: none;
+        color: #2563EB;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .content {
+        padding: 28px;
+        max-width: 1400px;
+        margin: auto;
+    }
+
+    /* =====================================================
+       VISTAS
+    ===================================================== */
+
+    .view {
+        display: none;
+        animation: aparecer 0.25s ease;
+    }
+
+    .view.active {
+        display: block;
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .page-header {
+        margin-bottom: 22px;
+    }
+
+    .page-header h2 {
+        font-size: 28px;
+        color: #172554;
+        margin-bottom: 7px;
+    }
+
+    .page-header p {
+        color: #64748B;
+        line-height: 1.6;
+    }
+
+    .back-button {
+        display: inline-block;
+        border: none;
+        background: #E8F0FF;
+        color: #2563EB;
+        padding: 9px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 17px;
+    }
+
+    .back-button:hover {
+        background: #2563EB;
+        color: white;
+    }
+
+    /* =====================================================
+       TARJETAS
+    ===================================================== */
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #D9E2F2;
+        box-shadow: 0 4px 12px rgba(30,41,59,0.06);
+        transition: 0.25s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 24px rgba(30,41,59,0.10);
+    }
+
+    .card-image {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        display: block;
+        background: #E8F0FF;
+    }
+
+    .card-body {
+        padding: 19px;
+    }
+
+    .card-body h3 {
+        color: #172554;
+        margin-bottom: 9px;
+        font-size: 19px;
+    }
+
+    .card-body p {
+        color: #64748B;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .card-button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .azul {
+        background: #2563EB;
+    }
+
+    .verde {
+        background: #16A34A;
+    }
+
+    .naranja {
+        background: #F59E0B;
+    }
+
+    .morado {
+        background: #7C3AED;
+    }
+
+    .turquesa {
+        background: #0891B2;
+    }
+
+    .rojo {
+        background: #DC2626;
+    }
+
+    /* =====================================================
+       TARJETAS PERSONAS
+    ===================================================== */
+
+    .persona-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 22px;
+    }
+
+    .persona-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        border: 1px solid #D9E2F2;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .persona-card img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .persona-card h3 {
+        color: #172554;
+        margin-bottom: 10px;
+    }
+
+    /* =====================================================
+       SECCIONES DE INFORMACION
+    ===================================================== */
+
+    .info-box {
+        background: white;
+        border-radius: 14px;
+        border: 1px solid #D9E2F2;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(30,41,59,0.05);
+    }
+
+    .info-box h3 {
+        color: #172554;
+        margin-bottom: 12px;
+        font-size: 19px;
+    }
+
+    .info-box h4 {
+        margin-top: 17px;
+        margin-bottom: 7px;
+        color: #2563EB;
+    }
+
+    .info-box p {
+        line-height: 1.7;
+        color: #475569;
+    }
+
+    .lista {
+        list-style: none;
+        margin-top: 12px;
+    }
+
+    .lista li {
+        padding: 10px 12px;
+        margin-bottom: 7px;
+        background: #F8FAFC;
+        border-left: 4px solid #2563EB;
+        border-radius: 5px;
+        line-height: 1.55;
+        color: #475569;
+    }
+
+    .lista.verde-lista li {
+        border-left-color: #16A34A;
+    }
+
+    .lista.naranja-lista li {
+        border-left-color: #F59E0B;
+    }
+
+    .lista.morado-lista li {
+        border-left-color: #7C3AED;
+    }
+
+    .lista.rojo-lista li {
+        border-left-color: #DC2626;
+    }
+
+    .important {
+        padding: 20px;
+        border-radius: 12px;
+        color: white;
+        margin-top: 20px;
+        line-height: 1.7;
+    }
+
+    .important h3 {
+        color: white;
+        margin-bottom: 8px;
+    }
+
+    .important.azul {
+        background: #2563EB;
+    }
+
+    .important.verde {
+        background: #16A34A;
+    }
+
+    .important.naranja {
+        background: #F59E0B;
+    }
+
+    .important.morado {
+        background: #7C3AED;
+    }
+
+    .important.turquesa {
+        background: #0891B2;
+    }
+
+    .important.rojo {
+        background: #DC2626;
+    }
+
+    /* =====================================================
+       IMAGEN GRANDE
+    ===================================================== */
+
+    .large-image {
+        width: 100%;
+        max-height: 380px;
+        object-fit: cover;
+        border-radius: 14px;
+        margin: 12px 0 22px;
+        background: #E8F0FF;
+    }
+
+    /* =====================================================
+       BIENVENIDA
+    ===================================================== */
+
+    .welcome {
+        background: linear-gradient(135deg, #172554, #2563EB);
+        color: white;
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(37,99,235,0.18);
+    }
+
+    .welcome h2 {
+        margin-bottom: 10px;
+        font-size: 28px;
+    }
+
+    .welcome p {
+        line-height: 1.7;
+        color: #E8F0FF;
+    }
+
+    .section-title {
+        font-size: 20px;
+        color: #172554;
+        margin-bottom: 16px;
+    }
+
+    /* =====================================================
+       NORMATIVIDAD
+    ===================================================== */
+
+    .norma-card {
+        cursor: pointer;
+    }
+
+    .norma-card .card-image {
+        height: 210px;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 900px) {
+
+        .sidebar {
+            width: 220px;
+        }
+
+        .main {
+            margin-left: 220px;
+            width: calc(100% - 220px);
+        }
+
+        .menu-button {
+            font-size: 13px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+    }
+
+    @media (max-width: 700px) {
+
+        .sidebar {
+            position: relative;
+            width: 100%;
+            height: auto;
+            min-height: auto;
+        }
+
+        .app {
+            display: block;
+        }
+
+        .main {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        .header {
+            position: relative;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+        }
+
+        .menu-title {
+            grid-column: 1 / -1;
+        }
+
+        .sidebar-bottom {
+            margin-top: 0;
+        }
+    }
+
+    @media (max-width: 500px) {
+
+        .menu {
+            grid-template-columns: 1fr;
+        }
+
+        .header {
+            padding: 13px 16px;
+        }
+
+        .header-title h1 {
+            font-size: 17px;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .page-header h2 {
+            font-size: 23px;
+        }
+
+        .welcome {
+            padding: 22px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="app">
+
+```
+<!-- =====================================================
+     MENU LATERAL
+====================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo-area">
+        <div class="logo-symbol">∞</div>
+        <div class="logo-name">INFINITO 2U</div>
+        <div class="logo-subtitle">Manual de Convivencia</div>
+    </div>
+
+    <nav class="menu">
+
+        <div class="menu-title">Manual</div>
+
+        <button class="menu-button active" onclick="mostrarVista('inicio')">
+            🏠 Inicio
+        </button>
+
+        <button class="menu-button morado" onclick="mostrarVista('normatividad')">
+            📖 Normatividad
+        </button>
+
+        <button class="menu-button verde" onclick="mostrarVista('derechos')">
+            ⚖️ Derechos y Obligaciones
+        </button>
+
+        <button class="menu-button" onclick="mostrarVista('parqueaderos')">
+            🚗 Parqueaderos
+        </button>
+
+        <button class="menu-button turquesa" onclick="mostrarVista('seguridad')">
+            🛡️ Seguridad y Portería
+        </button>
+
+        <button class="menu-button naranja" onclick="mostrarVista('trasteos')">
+            📦 Trasteos
+        </button>
+
+        <button class="menu-button verde" onclick="mostrarVista('residuos')">
+            ♻ Manejo de Residuos
+        </button>
+
+        <button class="menu-button" onclick="mostrarVista('fachadas')">
+            🏢 Fachadas
+        </button>
+
+        <button class="menu-button naranja" onclick="mostrarVista('reparaciones')">
+            🔧 Reparaciones
+        </button>
+
+        <button class="menu-button morado" onclick="mostrarVista('comite')">
+            ⚖ Comité de Convivencia
+        </button>
+
+        <button class="menu-button rojo" onclick="mostrarVista('emergencias')">
+            📞 Emergencias
+        </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="sidebar-brand">
+            <strong>INFINITO 2U</strong><br>
+            Manual Interactivo
+        </div>
+
+        <a href="{{ url_for('panel_admin') }}" class="back-panel">
+            ← Regresar al panel
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+====================================================== -->
+
+<main class="main">
+
+    <header class="header">
+
+        <div class="header-title">
+            <div class="header-icon">📖</div>
+
+            <div>
+                <h1>MANUAL INTERACTIVO</h1>
+                <p>INFINITO 2U • Conjunto Residencial</p>
+            </div>
+        </div>
+
+        <a href="{{ url_for('panel_admin') }}" class="header-back">
+            ← Volver al panel
+        </a>
+
+    </header>
+
+
+    <div class="content">
+
+
+        <!-- =================================================
+             INICIO
+        ================================================== -->
+
+        <section id="inicio" class="view active">
+
+            <div class="welcome">
+
+                <h2>📖 MANUAL DE CONVIVENCIA</h2>
+
+                <p>
+                    Bienvenido al Manual Interactivo de
+                    <strong>INFINITO 2U</strong>.
+                    Aquí encontrarás información sobre convivencia,
+                    seguridad, derechos, obligaciones y normas
+                    importantes para la comunidad residencial.
+                </p>
+
+            </div>
+
+            <h2 class="section-title">
+                ¿Qué desea consultar?
+            </h2>
+
+            <div class="persona-grid">
+
+
+                <div class="persona-card">
+
+                    <img src="{{ url_for('assets', filename='propietario.jpeg') }}"
+                         alt="Propietario"
+                         onerror="this.style.display='none'">
+
+                    <h3>👤 Propietario</h3>
+
+                    <p>
+                        Información sobre derechos,
+                        deberes y responsabilidades de los
+                        propietarios.
+                    </p>
+
+                    <button class="card-button azul"
+                            onclick="mostrarVista('propietario')">
+                        Consultar
+                    </button>
+
+                </div>
+
+
+                <div class="persona-card">
+
+                    <img src="{{ url_for('assets', filename='arrendatario.jpeg') }}"
+                         alt="Arrendatario"
+                         onerror="this.style.display='none'">
+
+                    <h3>🏠 Arrendatario</h3>
+
+                    <p>
+                        Recomendaciones y responsabilidades
+                        para quienes habitan un inmueble en calidad
+                        de arrendatarios.
+                    </p>
+
+                    <button class="card-button verde"
+                            onclick="mostrarVista('arrendatario')">
+                        Consultar
+                    </button>
+
+                </div>
+
+
+                <div class="persona-card">
+
+                    <img src="{{ url_for('assets', filename='visitante.jpeg') }}"
+                         alt="Visitante"
+                         onerror="this.style.display='none'">
+
+                    <h3>👥 Visitante</h3>
+
+                    <p>
+                        Recomendaciones para visitantes,
+                        ingreso, comportamiento y respeto
+                        por las normas de convivencia.
+                    </p>
+
+                    <button class="card-button naranja"
+                            onclick="mostrarVista('visitante')">
+                        Consultar
+                    </button>
+
+                </div>
+
+
+                <div class="persona-card">
+
+                    <img src="{{ url_for('assets', filename='consejo.jpeg') }}"
+                         alt="Consejo de Administración"
+                         onerror="this.style.display='none'">
+
+                    <h3>⚖️ Consejo / Comité</h3>
+
+                    <p>
+                        Información general sobre las
+                        responsabilidades del Consejo y los
+                        órganos de convivencia.
+                    </p>
+
+                    <button class="card-button morado"
+                            onclick="mostrarVista('consejo')">
+                        Consultar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROPIETARIO
+        ================================================== -->
+
+        <section id="propietario" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>👤 PROPIETARIO</h2>
+
+                <p>
+                    Derechos, deberes y responsabilidades
+                    dentro de la propiedad horizontal.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='propietario.jpeg') }}"
+                 alt="Propietario"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>DERECHOS, DEBERES Y RESPONSABILIDADES</h3>
+
+                <ul class="lista">
+
+                    <li>
+                        Derecho a utilizar y disfrutar su inmueble
+                        de acuerdo con las normas establecidas.
+                    </li>
+
+                    <li>
+                        Derecho a utilizar los bienes comunes
+                        conforme al reglamento.
+                    </li>
+
+                    <li>
+                        Participar en las decisiones de la copropiedad
+                        de acuerdo con las disposiciones aplicables.
+                    </li>
+
+                    <li>
+                        Cumplir el reglamento de propiedad horizontal
+                        y las normas de convivencia.
+                    </li>
+
+                    <li>
+                        Pagar oportunamente las obligaciones económicas
+                        correspondientes.
+                    </li>
+
+                    <li>
+                        Evitar comportamientos que afecten la tranquilidad,
+                        seguridad o bienestar de otros residentes.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important azul">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                La propiedad horizontal funciona correctamente cuando
+                cada propietario conoce sus derechos y cumple sus
+                responsabilidades.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ARRENDATARIO
+        ================================================== -->
+
+        <section id="arrendatario" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>🏠 ARRENDATARIO</h2>
+
+                <p>
+                    Recomendaciones y responsabilidades para
+                    quienes habitan un inmueble arrendado.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='arrendatario.jpeg') }}"
+                 alt="Arrendatario"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>DERECHOS Y RESPONSABILIDADES</h3>
+
+                <ul class="lista verde-lista">
+
+                    <li>
+                        Utilizar el inmueble de acuerdo con
+                        su destinación y las condiciones establecidas.
+                    </li>
+
+                    <li>
+                        Respetar las normas del conjunto residencial.
+                    </li>
+
+                    <li>
+                        Mantener un comportamiento respetuoso
+                        con los demás residentes.
+                    </li>
+
+                    <li>
+                        Cuidar las zonas comunes y los elementos
+                        que hacen parte de ellas.
+                    </li>
+
+                    <li>
+                        Respetar los horarios y normas relacionadas
+                        con ruido, reuniones y actividades.
+                    </li>
+
+                    <li>
+                        Informar oportunamente cualquier situación
+                        que pueda afectar el inmueble o la comunidad.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important verde">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                Ser arrendatario no elimina la obligación de
+                respetar el reglamento y las normas de convivencia
+                de la copropiedad.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             VISITANTE
+        ================================================== -->
+
+        <section id="visitante" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>👥 VISITANTE</h2>
+
+                <p>
+                    Recomendaciones para el ingreso y permanencia
+                    de visitantes dentro de INFINITO 2U.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='visitante.jpeg') }}"
+                 alt="Visitante"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>DERECHOS Y RESPONSABILIDADES</h3>
+
+                <ul class="lista naranja-lista">
+
+                    <li>
+                        Respetar los procedimientos de ingreso
+                        establecidos por la portería.
+                    </li>
+
+                    <li>
+                        Presentar la información requerida
+                        para autorizar el ingreso.
+                    </li>
+
+                    <li>
+                        Respetar las zonas comunes.
+                    </li>
+
+                    <li>
+                        Mantener un comportamiento respetuoso.
+                    </li>
+
+                    <li>
+                        Cumplir los horarios y normas internas.
+                    </li>
+
+                    <li>
+                        El residente que autoriza el ingreso debe
+                        responder por el comportamiento de su visitante
+                        cuando corresponda.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important naranja">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                Todo visitante debe contribuir a mantener
+                la seguridad, tranquilidad y buena convivencia
+                dentro del conjunto.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONSEJO
+        ================================================== -->
+
+        <section id="consejo" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>⚖️ CONSEJO / COMITÉ</h2>
+
+                <p>
+                    Información general sobre participación,
+                    responsabilidades y convivencia.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='consejo.jpeg') }}"
+                 alt="Consejo"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>RESPONSABILIDADES</h3>
+
+                <ul class="lista morado-lista">
+
+                    <li>
+                        Promover el cumplimiento de las normas
+                        de convivencia.
+                    </li>
+
+                    <li>
+                        Escuchar las diferentes situaciones
+                        presentadas por los residentes.
+                    </li>
+
+                    <li>
+                        Promover soluciones pacíficas a los conflictos.
+                    </li>
+
+                    <li>
+                        Actuar con respeto, imparcialidad y prudencia.
+                    </li>
+
+                    <li>
+                        Mantener la confidencialidad de la información
+                        cuando corresponda.
+                    </li>
+
+                    <li>
+                        Evitar conflictos de interés.
+                    </li>
+
+                    <li>
+                        Trabajar en beneficio de la comunidad.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important morado">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                La finalidad principal es favorecer una convivencia
+                organizada, respetuosa y pacífica.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NORMATIVIDAD
+        ================================================== -->
+
+        <section id="normatividad" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>📖 NORMATIVIDAD</h2>
+
+                <p>
+                    Principales normas y documentos de referencia
+                    relacionados con la propiedad horizontal y
+                    la convivencia.
+                </p>
+
+            </div>
+
+            <div class="cards">
+
+                <div class="card norma-card">
+
+                    <img class="card-image"
+                         src="{{ url_for('assets', filename='ley_675.jpeg') }}"
+                         alt="Ley 675"
+                         onerror="this.style.display='none'">
+
+                    <div class="card-body">
+
+                        <h3>📘 Ley 675 de 2001</h3>
+
+                        <p>
+                            Régimen de propiedad horizontal
+                            en Colombia.
+                        </p>
+
+                        <button class="card-button morado"
+                                onclick="mostrarVista('ley675')">
+                            Ver temas
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card norma-card">
+
+                    <img class="card-image"
+                         src="{{ url_for('assets', filename='ley_1801.jpeg') }}"
+                         alt="Ley 1801"
+                         onerror="this.style.display='none'">
+
+                    <div class="card-body">
+
+                        <h3>📕 Ley 1801 de 2016</h3>
+
+                        <p>
+                            Código Nacional de Seguridad y
+                            Convivencia Ciudadana.
+                        </p>
+
+                        <button class="card-button rojo"
+                                onclick="mostrarVista('ley1801')">
+                            Ver temas
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card norma-card">
+
+                    <img class="card-image"
+                         src="{{ url_for('assets', filename='reglamento.jpeg') }}"
+                         alt="Reglamento"
+                         onerror="this.style.display='none'">
+
+                    <div class="card-body">
+
+                        <h3>📋 Reglamento de Propiedad Horizontal</h3>
+
+                        <p>
+                            Reglas internas aplicables a la
+                            copropiedad.
+                        </p>
+
+                        <button class="card-button verde"
+                                onclick="mostrarVista('reglamento')">
+                            Ver temas
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card norma-card">
+
+                    <img class="card-image"
+                         src="{{ url_for('assets', filename='bogota.jpeg') }}"
+                         alt="Bogotá"
+                         onerror="this.style.display='none'">
+
+                    <div class="card-body">
+
+                        <h3>🏙️ Normas aplicables en Bogotá</h3>
+
+                        <p>
+                            Disposiciones y comportamientos
+                            relacionados con el contexto distrital.
+                        </p>
+
+                        <button class="card-button naranja"
+                                onclick="mostrarVista('bogota')">
+                            Ver información
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LEY 675
+        ================================================== -->
+
+        <section id="ley675" class="view">
+
+            <button class="back-button" onclick="mostrarVista('normatividad')">
+                ← Volver a Normatividad
+            </button>
+
+            <div class="page-header">
+
+                <h2>📘 LEY 675 DE 2001</h2>
+
+                <p>
+                    Temas importantes relacionados con la propiedad horizontal.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='ley_675.jpeg') }}"
+                 alt="Ley 675"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 PUNTOS IMPORTANTES</h3>
+
+                <h4>Derechos de los propietarios</h4>
+                <p>
+                    Los propietarios pueden ejercer los derechos
+                    derivados de su propiedad y participar en los
+                    asuntos de la copropiedad conforme a la ley.
+                </p>
+
+                <h4>Deberes de los propietarios</h4>
+                <p>
+                    Deben cumplir las obligaciones establecidas
+                    por la ley, el reglamento y las decisiones
+                    válidamente adoptadas.
+                </p>
+
+                <h4>Bienes privados</h4>
+                <p>
+                    Corresponden a las unidades de dominio privado
+                    de cada propietario.
+                </p>
+
+                <h4>Bienes comunes</h4>
+                <p>
+                    Son aquellos destinados al uso y beneficio
+                    común de la copropiedad.
+                </p>
+
+                <h4>Asamblea de propietarios</h4>
+                <p>
+                    Es uno de los principales órganos de decisión
+                    de la propiedad horizontal.
+                </p>
+
+                <h4>Consejo de Administración</h4>
+                <p>
+                    Cumple las funciones que le corresponden de
+                    acuerdo con la ley y el reglamento.
+                </p>
+
+                <h4>Administrador</h4>
+                <p>
+                    Tiene a su cargo las funciones administrativas
+                    establecidas para la copropiedad.
+                </p>
+
+                <h4>Convivencia</h4>
+                <p>
+                    Las normas deben favorecer el respeto,
+                    la tranquilidad y el adecuado uso de los bienes.
+                </p>
+
+            </div>
+
+            <div class="important morado">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                La Ley 675 de 2001 constituye una referencia
+                fundamental para la organización y funcionamiento
+                de la propiedad horizontal en Colombia.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LEY 1801
+        ================================================== -->
+
+        <section id="ley1801" class="view">
+
+            <button class="back-button" onclick="mostrarVista('normatividad')">
+                ← Volver a Normatividad
+            </button>
+
+            <div class="page-header">
+
+                <h2>📕 LEY 1801 DE 2016</h2>
+
+                <p>
+                    Código Nacional de Seguridad y Convivencia Ciudadana.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='ley_1801.jpeg') }}"
+                 alt="Ley 1801"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 PUNTOS IMPORTANTES</h3>
+
+                <ul class="lista rojo-lista">
+
+                    <li>
+                        Tranquilidad: evitar comportamientos
+                        que afecten la tranquilidad de otras personas.
+                    </li>
+
+                    <li>
+                        Seguridad: adoptar comportamientos que
+                        reduzcan riesgos.
+                    </li>
+
+                    <li>
+                        Respeto: mantener relaciones respetuosas.
+                    </li>
+
+                    <li>
+                        Convivencia: favorecer relaciones pacíficas
+                        dentro de la comunidad.
+                    </li>
+
+                    <li>
+                        Espacios comunes: hacer un uso adecuado
+                        y respetuoso de los espacios compartidos.
+                    </li>
+
+                    <li>
+                        Autoridades: acudir a las autoridades
+                        competentes cuando la situación lo requiera.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important rojo">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                La convivencia requiere responsabilidad individual
+                y respeto por los derechos de los demás.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REGLAMENTO
+        ================================================== -->
+
+        <section id="reglamento" class="view">
+
+            <button class="back-button" onclick="mostrarVista('normatividad')">
+                ← Volver a Normatividad
+            </button>
+
+            <div class="page-header">
+
+                <h2>📋 REGLAMENTO DE PROPIEDAD HORIZONTAL</h2>
+
+                <p>
+                    Reglas internas para una convivencia organizada.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='reglamento.jpeg') }}"
+                 alt="Reglamento"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 TEMAS PRINCIPALES</h3>
+
+                <ul class="lista verde-lista">
+
+                    <li>Zonas comunes</li>
+                    <li>Parqueaderos</li>
+                    <li>Trasteos</li>
+                    <li>Reparaciones</li>
+                    <li>Manejo de residuos</li>
+                    <li>Fachadas</li>
+                    <li>Mascotas</li>
+                    <li>Visitantes</li>
+
+                </ul>
+
+            </div>
+
+            <div class="important verde">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                El reglamento permite establecer reglas claras
+                para que todos sepan qué deben cumplir dentro
+                de INFINITO 2U.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BOGOTA
+        ================================================== -->
+
+        <section id="bogota" class="view">
+
+            <button class="back-button" onclick="mostrarVista('normatividad')">
+                ← Volver a Normatividad
+            </button>
+
+            <div class="page-header">
+
+                <h2>🏙️ NORMAS APLICABLES EN BOGOTÁ</h2>
+
+                <p>
+                    Normas y comportamientos relacionados con
+                    el contexto distrital.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='bogota.jpeg') }}"
+                 alt="Bogotá"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 PUNTOS IMPORTANTES</h3>
+
+                <ul class="lista naranja-lista">
+
+                    <li>
+                        <strong>Manejo de residuos:</strong>
+                        Los residuos deben separarse y entregarse
+                        correctamente.
+                    </li>
+
+                    <li>
+                        <strong>Espacio público:</strong>
+                        Debe evitarse la ocupación indebida
+                        de espacios públicos.
+                    </li>
+
+                    <li>
+                        <strong>Movilidad:</strong>
+                        Se deben respetar las normas de tránsito
+                        y movilidad.
+                    </li>
+
+                    <li>
+                        <strong>Seguridad:</strong>
+                        Se deben adoptar comportamientos que
+                        ayuden a prevenir riesgos.
+                    </li>
+
+                    <li>
+                        <strong>Medio ambiente:</strong>
+                        Todos deben contribuir al cuidado de
+                        los recursos naturales.
+                    </li>
+
+                    <li>
+                        <strong>Convivencia ciudadana:</strong>
+                        Los comportamientos deben favorecer
+                        el respeto y la tranquilidad.
+                    </li>
+
+                    <li>
+                        <strong>Servicios públicos:</strong>
+                        Debe hacerse un uso responsable
+                        de los servicios.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important naranja">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                Las normas nacionales, distritales y las reglas
+                internas se complementan para favorecer una
+                comunidad organizada y segura.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DERECHOS Y OBLIGACIONES
+        ================================================== -->
+
+        <section id="derechos" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>⚖️ DERECHOS Y OBLIGACIONES</h2>
+
+                <p>
+                    Manual Jurídico del Comité de Convivencia
+                    • INFINITO 2U
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='derechos_obligaciones.jpeg') }}"
+                 alt="Derechos y obligaciones"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>Derechos</h3>
+
+                <p>
+                    Toda persona tiene derecho a ser escuchada,
+                    recibir un trato respetuoso y participar en
+                    mecanismos de solución de conflictos.
+                </p>
+
+                <h3>Obligaciones</h3>
+
+                <p>
+                    Los residentes deben respetar las normas,
+                    mantener una conducta adecuada y contribuir
+                    a una convivencia pacífica.
+                </p>
+
+                <h3>Derechos durante una actuación del Comité</h3>
+
+                <p>
+                    Las partes deben tener la posibilidad de
+                    expresar su situación y ser escuchadas.
+                </p>
+
+                <h3>Responsabilidades frente a la convivencia</h3>
+
+                <p>
+                    Cada integrante de la comunidad debe actuar
+                    procurando no afectar los derechos de los demás.
+                </p>
+
+                <h3>Confidencialidad y protección de datos</h3>
+
+                <p>
+                    La información recibida durante una situación
+                    debe manejarse con responsabilidad y respeto
+                    por la privacidad.
+                </p>
+
+                <h3>Responsabilidades de los miembros del Comité</h3>
+
+                <p>
+                    Los integrantes deben actuar con imparcialidad,
+                    respeto y prudencia.
+                </p>
+
+                <h3>Conflictos de interés e impedimentos</h3>
+
+                <p>
+                    Cuando exista una situación que pueda afectar
+                    la imparcialidad, debe informarse oportunamente.
+                </p>
+
+                <h3>Lo que NO corresponde al Comité de Convivencia</h3>
+
+                <p>
+                    El Comité no reemplaza a las autoridades
+                    competentes ni ejerce funciones que correspondan
+                    a otras instituciones.
+                </p>
+
+                <h3>Rutas institucionales</h3>
+
+                <p>
+                    Dependiendo de la situación, pueden utilizarse
+                    los canales administrativos o institucionales
+                    correspondientes.
+                </p>
+
+                <h3>Mecanismos de solución de conflictos</h3>
+
+                <p>
+                    Se deben promover alternativas de diálogo,
+                    respeto y solución pacífica.
+                </p>
+
+            </div>
+
+            <div class="important verde">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                El respeto, la imparcialidad, el diálogo y la
+                confidencialidad son fundamentales para una
+                adecuada convivencia.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PARQUEADEROS
+        ================================================== -->
+
+        <section id="parqueaderos" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>🚗 PARQUEADEROS</h2>
+
+                <p>
+                    Normas para el uso seguro y adecuado
+                    de los parqueaderos.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='parqueadero.jpeg') }}"
+                 alt="Parqueaderos"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 RECOMENDACIONES</h3>
+
+                <ul class="lista">
+
+                    <li>
+                        Utilice únicamente el espacio asignado
+                        o autorizado.
+                    </li>
+
+                    <li>
+                        Respete los espacios asignados a los demás.
+                    </li>
+
+                    <li>
+                        No bloquee entradas, salidas, rampas
+                        ni zonas de circulación.
+                    </li>
+
+                    <li>
+                        Conduzca a una velocidad segura.
+                    </li>
+
+                    <li>
+                        Respete la señalización y demarcación.
+                    </li>
+
+                    <li>
+                        No utilice el parqueadero para juegos.
+                    </li>
+
+                    <li>
+                        No almacene objetos o materiales peligrosos.
+                    </li>
+
+                    <li>
+                        Evite realizar reparaciones mayores
+                        o actividades que puedan afectar otros vehículos.
+                    </li>
+
+                    <li>
+                        Mantenga limpio el espacio.
+                    </li>
+
+                    <li>
+                        Respete los espacios destinados a visitantes
+                        o personas con discapacidad.
+                    </li>
+
+                    <li>
+                        Los visitantes deben utilizar únicamente
+                        los espacios autorizados.
+                    </li>
+
+                    <li>
+                        No invada ni obstruya espacios de otros residentes.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="info-box">
+
+                <h3>🔐 Seguridad</h3>
+
+                <ul class="lista">
+
+                    <li>
+                        Cierre correctamente su vehículo.
+                    </li>
+
+                    <li>
+                        No deje objetos de valor visibles.
+                    </li>
+
+                    <li>
+                        Informe cualquier situación sospechosa
+                        a seguridad o administración.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important azul">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                El parqueadero es un espacio de uso regulado.
+                Respetar los espacios y las normas ayuda a
+                prevenir conflictos y accidentes.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEGURIDAD
+        ================================================== -->
+
+        <section id="seguridad" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>🛡️ SEGURIDAD Y PORTERÍA</h2>
+
+                <p>
+                    Recomendaciones para proteger a residentes,
+                    visitantes y bienes de la copropiedad.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='seguridadyporteria.jpeg') }}"
+                 alt="Seguridad y portería"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 RECOMENDACIONES</h3>
+
+                <ul class="lista">
+
+                    <li>Respete los procedimientos de ingreso.</li>
+
+                    <li>
+                        Permita que el personal de seguridad
+                        realice las verificaciones correspondientes.
+                    </li>
+
+                    <li>
+                        No facilite el ingreso a personas
+                        no autorizadas.
+                    </li>
+
+                    <li>
+                        Mantenga actualizada la información
+                        de visitantes cuando sea necesario.
+                    </li>
+
+                    <li>
+                        Informe oportunamente situaciones sospechosas.
+                    </li>
+
+                    <li>
+                        Respete las instrucciones de seguridad.
+                    </li>
+
+                    <li>
+                        No abra puertas o accesos para personas
+                        que no conozca o no estén autorizadas.
+                    </li>
+
+                    <li>
+                        Mantenga una actitud respetuosa con
+                        el personal de vigilancia.
+                    </li>
+
+                    <li>
+                        En caso de emergencia, siga las instrucciones
+                        del personal autorizado.
+                    </li>
+
+                    <li>
+                        Evite compartir información de seguridad
+                        del conjunto con personas no autorizadas.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="info-box">
+
+                <h3>👥 Ingreso de visitantes</h3>
+
+                <p>
+                    El ingreso de visitantes debe realizarse
+                    siguiendo los procedimientos establecidos
+                    por la administración y la seguridad del conjunto.
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <h3>🚗 Ingreso y salida de vehículos</h3>
+
+                <p>
+                    Respete la señalización, reduzca la velocidad
+                    y siga las instrucciones del personal de seguridad.
+                </p>
+
+            </div>
+
+            <div class="important turquesa">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                La seguridad es responsabilidad de todos.
+                Una comunidad segura requiere colaboración,
+                prevención y comunicación oportuna.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TRASTEOS
+        ================================================== -->
+
+        <section id="trasteos" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>📦 TRASTEOS</h2>
+
+                <p>
+                    Recomendaciones para realizar trasteos
+                    de forma organizada y segura.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='trasteos.png') }}"
+                 alt="Trasteos"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>Antes de realizar el trasteo</h3>
+
+                <p>
+                    Informe y coordine previamente el trasteo
+                    con la administración de acuerdo con
+                    los procedimientos establecidos.
+                </p>
+
+                <h3>Horarios y autorización</h3>
+
+                <p>
+                    Los trasteos deben realizarse dentro de
+                    los horarios autorizados por la copropiedad.
+                </p>
+
+                <h3>Protección de zonas comunes</h3>
+
+                <p>
+                    Proteja pisos, paredes, ascensores y demás
+                    elementos que puedan verse afectados.
+                </p>
+
+                <h3>Ascensores y circulación</h3>
+
+                <p>
+                    Utilice los ascensores y rutas de circulación
+                    de acuerdo con las indicaciones establecidas.
+                </p>
+
+                <h3>Seguridad durante el trasteo</h3>
+
+                <p>
+                    Mantenga despejadas las rutas de evacuación
+                    y evite situaciones que generen riesgos.
+                </p>
+
+                <h3>Vehículos y cargue</h3>
+
+                <p>
+                    Los vehículos utilizados deben ubicarse
+                    únicamente en las zonas autorizadas.
+                </p>
+
+                <h3>Responsabilidad por daños</h3>
+
+                <p>
+                    Los daños ocasionados durante el trasteo
+                    deben ser reportados y atendidos por
+                    quien corresponda.
+                </p>
+
+                <h3>Limpieza y finalización</h3>
+
+                <p>
+                    Al terminar, las áreas utilizadas deben
+                    quedar limpias y libres de residuos.
+                </p>
+
+            </div>
+
+            <div class="important naranja">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                Un trasteo organizado protege las zonas comunes,
+                reduce riesgos y evita afectar a los demás residentes.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RESIDUOS
+        ================================================== -->
+
+        <section id="residuos" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>♻ MANEJO DE RESIDUOS</h2>
+
+                <p>
+                    Separación y disposición adecuada de residuos.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='residuos.jpeg') }}"
+                 alt="Manejo de residuos"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>🗑️ Separación de residuos</h3>
+
+                <ul class="lista verde-lista">
+
+                    <li>
+                        ⚪ <strong>Bolsa blanca:</strong>
+                        residuos aprovechables como papel, cartón,
+                        plástico, vidrio y metales.
+                    </li>
+
+                    <li>
+                        ⚫ <strong>Bolsa negra:</strong>
+                        residuos no aprovechables.
+                    </li>
+
+                    <li>
+                        🟢 <strong>Bolsa verde:</strong>
+                        residuos orgánicos aprovechables.
+                    </li>
+
+                    <li>
+                        Realice la separación de residuos
+                        desde el lugar donde se generan.
+                    </li>
+
+                    <li>
+                        Deposite los residuos en el recipiente
+                        o zona correspondiente.
+                    </li>
+
+                    <li>
+                        Mantenga limpias y organizadas las zonas
+                        destinadas al manejo de residuos.
+                    </li>
+
+                    <li>
+                        No deje bolsas, cajas u objetos fuera
+                        de los lugares autorizados.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important verde">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                Separar correctamente los residuos desde el origen
+                ayuda a mantener limpio el conjunto y facilita
+                su aprovechamiento y disposición adecuada.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FACHADAS
+        ================================================== -->
+
+        <section id="fachadas" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>🏢 FACHADAS</h2>
+
+                <p>
+                    Cuidado de la apariencia exterior y de los
+                    elementos que hacen parte de la copropiedad.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='fachadas.jpeg') }}"
+                 alt="Fachadas"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 RECOMENDACIONES</h3>
+
+                <ul class="lista">
+
+                    <li>
+                        Conservar la apariencia exterior y la
+                        armonía arquitectónica.
+                    </li>
+
+                    <li>
+                        Verificar si cualquier modificación
+                        requiere autorización previa.
+                    </li>
+
+                    <li>
+                        Evitar instalaciones visibles no autorizadas.
+                    </li>
+
+                    <li>
+                        No realizar cambios de color,
+                        cerramientos, avisos u otras modificaciones
+                        sin la autorización correspondiente.
+                    </li>
+
+                    <li>
+                        Reportar daños, desprendimientos o humedades.
+                    </li>
+
+                    <li>
+                        Respetar los elementos que hagan parte
+                        de las zonas comunes.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important azul">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                Antes de modificar cualquier elemento exterior,
+                consulte a la administración y verifique si
+                requiere autorización.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REPARACIONES
+        ================================================== -->
+
+        <section id="reparaciones" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>🔧 REPARACIONES</h2>
+
+                <p>
+                    Recomendaciones para reportar y atender
+                    daños dentro de la copropiedad.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='reparaciones.jpeg') }}"
+                 alt="Reparaciones"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>1. Reparaciones dentro del apartamento</h3>
+                <p>
+                    Las reparaciones privadas deben realizarse
+                    respetando las normas y horarios establecidos.
+                </p>
+
+                <h3>2. Reparaciones en zonas comunes</h3>
+                <p>
+                    Los daños en zonas comunes deben reportarse
+                    a la administración.
+                </p>
+
+                <h3>3. Fugas de agua y daños de tuberías</h3>
+                <p>
+                    Una fuga debe reportarse oportunamente para
+                    evitar daños mayores.
+                </p>
+
+                <h3>4. Problemas eléctricos</h3>
+                <p>
+                    Las fallas eléctricas deben atenderse con
+                    precaución y por personal competente.
+                </p>
+
+                <h3>5. Puertas, ventanas y cerraduras</h3>
+                <p>
+                    Los daños deben revisarse para determinar
+                    si corresponden al inmueble privado o a
+                    un elemento común.
+                </p>
+
+                <h3>6. Humedades, filtraciones y daños en paredes</h3>
+                <p>
+                    Deben reportarse para determinar su origen
+                    y evitar que el daño aumente.
+                </p>
+
+                <h3>7. Reparaciones urgentes</h3>
+                <p>
+                    Las situaciones que puedan generar riesgos
+                    deben comunicarse inmediatamente.
+                </p>
+
+                <h3>8. Cómo reportar una reparación a la administración</h3>
+                <p>
+                    Utilice los canales establecidos y suministre
+                    información clara sobre el daño.
+                </p>
+
+                <h3>9. Información que debe entregar el residente</h3>
+                <p>
+                    Indique ubicación, descripción del problema,
+                    fecha aproximada y cualquier información útil.
+                </p>
+
+                <h3>10. Reparaciones del propietario y de la copropiedad</h3>
+                <p>
+                    Es importante identificar si el elemento
+                    afectado pertenece al inmueble privado
+                    o a las zonas comunes.
+                </p>
+
+                <h3>11. Ingreso y trabajo de contratistas</h3>
+                <p>
+                    Los contratistas deben cumplir los procedimientos
+                    de ingreso y las normas de seguridad.
+                </p>
+
+                <h3>12. Registro fotográfico del daño</h3>
+                <p>
+                    Cuando sea posible, acompañe el reporte
+                    con fotografías que permitan identificar
+                    claramente la situación.
+                </p>
+
+            </div>
+
+            <div class="important naranja">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                No ignores un daño pequeño. Una fuga, humedad,
+                grieta, falla eléctrica o elemento deteriorado
+                puede empeorar con el tiempo y generar mayores
+                costos o afectar a otros residentes.
+
+                <br><br>
+
+                Reporta oportunamente y utiliza los canales
+                establecidos por la administración.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COMITE
+        ================================================== -->
+
+        <section id="comite" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>⚖ COMITÉ DE CONVIVENCIA</h2>
+
+                <p>
+                    Promoción del diálogo y solución pacífica
+                    de situaciones de convivencia.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='Comitedeconvivencia.jpeg') }}"
+                 alt="Comité de convivencia"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <ul class="lista morado-lista">
+
+                    <li>
+                        <strong>¿Qué es?</strong>
+                        Es un espacio orientado a apoyar la
+                        convivencia y promover soluciones pacíficas.
+                    </li>
+
+                    <li>
+                        <strong>Función:</strong>
+                        Facilitar el diálogo entre las partes.
+                    </li>
+
+                    <li>
+                        <strong>Manejo de conflictos:</strong>
+                        Buscar alternativas respetuosas y constructivas.
+                    </li>
+
+                    <li>
+                        <strong>Cuándo acudir:</strong>
+                        Cuando exista una situación de convivencia
+                        que requiera diálogo o mediación.
+                    </li>
+
+                    <li>
+                        <strong>Participación de las partes:</strong>
+                        Las personas involucradas deben tener
+                        oportunidad de expresar su situación.
+                    </li>
+
+                    <li>
+                        <strong>Presentación de la situación:</strong>
+                        Se debe explicar de manera clara y respetuosa.
+                    </li>
+
+                    <li>
+                        <strong>Escuchar antes de concluir:</strong>
+                        Es importante conocer las diferentes versiones.
+                    </li>
+
+                    <li>
+                        <strong>Búsqueda de soluciones pacíficas:</strong>
+                        Se deben priorizar acuerdos y diálogo.
+                    </li>
+
+                    <li>
+                        <strong>Respeto y confidencialidad:</strong>
+                        La información debe manejarse con prudencia.
+                    </li>
+
+                    <li>
+                        <strong>Qué debe evitarse:</strong>
+                        Agresiones, amenazas, insultos o confrontaciones.
+                    </li>
+
+                    <li>
+                        <strong>Relación con administración:</strong>
+                        El Comité puede trabajar articuladamente
+                        con la administración cuando corresponda.
+                    </li>
+
+                    <li>
+                        <strong>Objetivo principal:</strong>
+                        Contribuir a una convivencia sana,
+                        respetuosa y pacífica.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important morado">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                El diálogo y el respeto son herramientas
+                fundamentales para resolver los conflictos
+                de convivencia.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EMERGENCIAS
+        ================================================== -->
+
+        <section id="emergencias" class="view">
+
+            <button class="back-button" onclick="mostrarVista('inicio')">
+                ← Inicio del manual
+            </button>
+
+            <div class="page-header">
+
+                <h2>🚨 EMERGENCIAS</h2>
+
+                <p>
+                    Recomendaciones para actuar ante situaciones
+                    de emergencia.
+                </p>
+
+            </div>
+
+            <img class="large-image"
+                 src="{{ url_for('assets', filename='Emergencias.jpeg') }}"
+                 alt="Emergencias"
+                 onerror="this.style.display='none'">
+
+            <div class="info-box">
+
+                <h3>📌 RECOMENDACIONES</h3>
+
+                <ul class="lista rojo-lista">
+
+                    <li>
+                        <strong>Policía:</strong>
+                        Comuníquese con la autoridad competente
+                        cuando exista una situación que requiera
+                        intervención policial.
+                    </li>
+
+                    <li>
+                        <strong>Ambulancia:</strong>
+                        Solicite atención médica ante emergencias
+                        que comprometan la salud o integridad.
+                    </li>
+
+                    <li>
+                        <strong>Bomberos:</strong>
+                        Solicite ayuda ante incendios u otras
+                        situaciones que requieran su intervención.
+                    </li>
+
+                    <li>
+                        <strong>Servicios públicos:</strong>
+                        Informe daños o emergencias relacionadas
+                        con servicios públicos.
+                    </li>
+
+                    <li>
+                        <strong>Administración y seguridad:</strong>
+                        Informe oportunamente la situación
+                        al personal disponible.
+                    </li>
+
+                    <li>
+                        <strong>Cómo reportar una emergencia:</strong>
+                        Explique claramente qué ocurrió,
+                        dónde ocurrió y si existen personas afectadas.
+                    </li>
+
+                    <li>
+                        <strong>Mantener la calma:</strong>
+                        Evite acciones que puedan aumentar el riesgo.
+                    </li>
+
+                    <li>
+                        <strong>Evacuación:</strong>
+                        Siga las rutas y las instrucciones
+                        de evacuación.
+                    </li>
+
+                    <li>
+                        <strong>Punto de encuentro:</strong>
+                        Diríjase al punto establecido por
+                        la copropiedad cuando corresponda.
+                    </li>
+
+                    <li>
+                        <strong>Situaciones de atención inmediata:</strong>
+                        Incendios, accidentes graves, amenazas,
+                        fugas importantes u otras situaciones
+                        que representen un riesgo.
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="important rojo">
+
+                <h3>⭐ LO MÁS IMPORTANTE</h3>
+
+                En una emergencia, mantén la calma, informa
+                oportunamente y sigue las instrucciones del
+                personal autorizado y de los organismos de emergencia.
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+```
+
+</div>
+
+<script>
+
+    /* =========================================================
+       NAVEGACION DEL MANUAL
+    ========================================================= */
+
+    function mostrarVista(id) {
+
+        const vistas = document.querySelectorAll(".view");
+
+        vistas.forEach(function(vista) {
+            vista.classList.remove("active");
+        });
+
+        const seleccionada = document.getElementById(id);
+
+        if (seleccionada) {
+            seleccionada.classList.add("active");
+        }
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        actualizarMenu(id);
+    }
+
+
+    /* =========================================================
+       MENU ACTIVO
+    ========================================================= */
+
+    function actualizarMenu(id) {
+
+        const botones = document.querySelectorAll(".menu-button");
+
+        botones.forEach(function(boton) {
+            boton.classList.remove("active");
+        });
+
+        const mapa = {
+            "inicio": 0,
+            "normatividad": 1,
+            "derechos": 2,
+            "parqueaderos": 3,
+            "seguridad": 4,
+            "trasteos": 5,
+            "residuos": 6,
+            "fachadas": 7,
+            "reparaciones": 8,
+            "comite": 9,
+            "emergencias": 10
+        };
+
+        if (mapa[id] !== undefined && botones[mapa[id]]) {
+            botones[mapa[id]].classList.add("active");
+        }
+    }
+
+</script>
+
+</body>
+</html>

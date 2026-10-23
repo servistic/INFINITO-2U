@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITO 2U - Asistente virtual</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef3f7;
+            color: #263238;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =====================================================
+           ENCABEZADO
+        ===================================================== */
+
+        .header {
+            height: 78px;
+
+            background: linear-gradient(
+                135deg,
+                #42a5c6,
+                #247d99
+            );
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 28px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.15);
+
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            background: white;
+
+            padding: 3px;
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.18);
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-size: 21px;
+            font-weight: bold;
+            letter-spacing: 0.4px;
+        }
+
+        .brand-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .online {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+        }
+
+        .online-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #55efc4;
+
+            box-shadow:
+                0 0 8px rgba(85,239,196,0.8);
+        }
+
+        .back-button {
+            border: none;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            color: white;
+
+            padding: 10px 17px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .back-button:hover {
+            background:
+                rgba(255,255,255,0.25);
+        }
+
+        /* =====================================================
+           CUERPO
+        ===================================================== */
+
+        .content {
+            flex: 1;
+
+            display: flex;
+
+            min-height: 0;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            width: 245px;
+
+            background: white;
+
+            border-right:
+                1px solid #d5e2e8;
+
+            padding: 25px 16px;
+
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #6c757d;
+
+            text-transform: uppercase;
+
+            margin:
+                0 10px 14px;
+
+            letter-spacing: 0.5px;
+        }
+
+        .topic {
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 13px;
+
+            margin-bottom: 5px;
+
+            border-radius: 9px;
+
+            color: #34495e;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .topic:hover {
+            background: #eef7fa;
+            color: #247d99;
+        }
+
+        .topic.active {
+            background: #e8f5f9;
+            color: #247d99;
+            font-weight: bold;
+        }
+
+        .topic-icon {
+            width: 28px;
+
+            font-size: 18px;
+
+            text-align: center;
+        }
+
+        /* =====================================================
+           PRINCIPAL
+        ===================================================== */
+
+        .main {
+            flex: 1;
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-width: 0;
+
+            min-height: 0;
+        }
+
+        .welcome {
+            background: white;
+
+            padding:
+                27px 35px;
+
+            border-bottom:
+                1px solid #d5e2e8;
+        }
+
+        .welcome h1 {
+            font-size: 25px;
+
+            color: #1e3a5f;
+
+            margin-bottom: 7px;
+        }
+
+        .welcome p {
+            font-size: 14px;
+
+            color: #6c757d;
+        }
+
+        /* =====================================================
+           CHAT
+        ===================================================== */
+
+        .chat-container {
+            flex: 1;
+
+            min-height: 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            padding:
+                20px 35px 25px;
+        }
+
+        .chat-card {
+            flex: 1;
+
+            min-height: 0;
+
+            background: white;
+
+            border-radius: 15px;
+
+            border:
+                1px solid #d5e2e8;
+
+            box-shadow:
+                0 4px 18px
+                rgba(30,58,95,0.07);
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+        }
+
+        /* =====================================================
+           CHAT HEADER
+        ===================================================== */
+
+        .chat-header {
+            height: 58px;
+
+            border-bottom:
+                1px solid #e3ebef;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 20px;
+        }
+
+        .chat-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            color: #1e3a5f;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+        .chat-title-icon {
+            width: 31px;
+            height: 31px;
+
+            border-radius: 8px;
+
+            background: #e8f5f9;
+
+            color: #247d99;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+        .chat-status {
+            color: #6c757d;
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           MENSAJES
+        ===================================================== */
+
+        .messages {
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 24px;
+
+            scroll-behavior: smooth;
+        }
+
+        .message {
+            display: flex;
+
+            margin-bottom: 18px;
+
+            animation:
+                aparecer 0.25s ease;
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+        .message.bot {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+
+            min-width: 35px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-right: 10px;
+
+            font-size: 17px;
+        }
+
+        .bot .avatar {
+            background: #e8f5f9;
+        }
+
+        .user .avatar {
+            background: #2878b5;
+
+            color: white;
+
+            margin-left: 10px;
+
+            margin-right: 0;
+        }
+
+        .message-content {
+            max-width: 72%;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+
+            border-radius: 13px;
+
+            font-size: 14px;
+
+            line-height: 1.55;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+        }
+
+        .bot .bubble {
+            background: #e8f5f9;
+
+            color: #263238;
+
+            border-top-left-radius: 4px;
+        }
+
+        .user .bubble {
+            background: #2878b5;
+
+            color: white;
+
+            border-top-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 10px;
+
+            color: #9aa7ad;
+
+            margin-top: 5px;
+        }
+
+        .user .message-time {
+            text-align: right;
+        }
+
+        /* =====================================================
+           PREGUNTAS RÁPIDAS
+        ===================================================== */
+
+        .quick-area {
+            padding:
+                12px 20px;
+
+            border-top:
+                1px solid #e3ebef;
+
+            background: #fafcfd;
+        }
+
+        .quick-title {
+            font-size: 11px;
+
+            color: #7a878d;
+
+            margin-bottom: 9px;
+        }
+
+        .quick-buttons {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        .quick-button {
+            border:
+                1px solid #c8dce4;
+
+            background: white;
+
+            color: #247d99;
+
+            padding:
+                8px 12px;
+
+            border-radius: 18px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+        .quick-button:hover {
+            background: #e8f5f9;
+
+            border-color: #42a5c6;
+        }
+
+        /* =====================================================
+           INPUT
+        ===================================================== */
+
+        .input-area {
+            padding:
+                14px 18px 17px;
+
+            border-top:
+                1px solid #e3ebef;
+
+            background: white;
+        }
+
+        .input-box {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            background: #f4f7f9;
+
+            border:
+                1px solid #d5e2e8;
+
+            border-radius: 12px;
+
+            padding:
+                6px 7px 6px 15px;
+
+            transition: 0.2s;
+        }
+
+        .input-box:focus-within {
+            border-color: #42a5c6;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(66,165,198,0.10);
+        }
+
+        #pregunta {
+            flex: 1;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            color: #263238;
+
+            min-width: 0;
+
+            padding: 8px 0;
+        }
+
+        #pregunta::placeholder {
+            color: #9aa7ad;
+        }
+
+        .send-button {
+            width: 42px;
+            height: 42px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #247d99;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: 0.2s;
+        }
+
+        .send-button:hover {
+            background: #1e6c84;
+
+            transform:
+                translateY(-1px);
+        }
+
+        .send-button:disabled {
+            background: #aebdc3;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        .input-help {
+            font-size: 10px;
+
+            color: #9aa7ad;
+
+            margin-top: 7px;
+
+            text-align: center;
+        }
+
+        /* =====================================================
+           ESCRIBIENDO
+        ===================================================== */
+
+        .typing {
+            display: flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            padding: 5px 2px;
+        }
+
+        .typing span {
+            width: 6px;
+            height: 6px;
+
+            background: #247d99;
+
+            border-radius: 50%;
+
+            animation:
+                typing 1.2s infinite;
+        }
+
+        .typing span:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .typing span:nth-child(3) {
+            animation-delay: 0.30s;
+        }
+
+        @keyframes typing {
+
+            0%, 60%, 100% {
+                transform:
+                    translateY(0);
+
+                opacity: 0.4;
+            }
+
+            30% {
+                transform:
+                    translateY(-5px);
+
+                opacity: 1;
+            }
+
+        }
+
+        /* =====================================================
+           SCROLLBAR
+        ===================================================== */
+
+        .messages::-webkit-scrollbar,
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages::-webkit-scrollbar-thumb,
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #c8d7dd;
+
+            border-radius: 10px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .chat-container {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .welcome {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .message-content {
+                max-width: 82%;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            body {
+                overflow: auto;
+            }
+
+            .header {
+                height: 70px;
+
+                padding:
+                    0 15px;
+            }
+
+            .brand-title {
+                font-size: 17px;
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .online {
+                display: none;
+            }
+
+            .back-button {
+                padding:
+                    8px 11px;
+            }
+
+            .content {
+                min-height:
+                    calc(100vh - 70px);
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .welcome {
+                padding: 18px;
+            }
+
+            .welcome h1 {
+                font-size: 21px;
+            }
+
+            .chat-container {
+                padding: 12px;
+            }
+
+            .messages {
+                padding: 16px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .quick-buttons {
+                max-height: 80px;
+
+                overflow-y: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="header-left">
+
+            <img
+                src="{{ url_for('assets', filename='logo.jpeg') }}"
+                alt="INFINITO 2U"
+                class="logo"
+                onerror="this.style.display='none';"
+            >
+
+            <div class="brand">
+
+                <div class="brand-title">
+                    INFINITO 2U
+                </div>
+
+                <div class="brand-subtitle">
+                    Asistente virtual
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <div class="online">
+
+                <span class="online-dot"></span>
+
+                En línea
+
+            </div>
+
+
+            <button
+                class="back-button"
+                type="button"
+                onclick="volver()">
+
+                ← Volver
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENIDO
+    ====================================================== -->
+
+    <div class="content">
+
+
+        <!-- =================================================
+             BARRA LATERAL
+        ================================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                Temas de consulta
+            </div>
+
+
+            <button
+                class="topic active"
+                type="button"
+                onclick="preguntaRapida('¿Qué información tienen sobre los residentes?')">
+
+                <span class="topic-icon">
+                    👥
+                </span>
+
+                <span>
+                    Residentes
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué normas deben cumplir los visitantes?')">
+
+                <span class="topic-icon">
+                    🚪
+                </span>
+
+                <span>
+                    Visitantes
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué reglas existen para las mascotas?')">
+
+                <span class="topic-icon">
+                    🐾
+                </span>
+
+                <span>
+                    Mascotas
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué puedo hacer si tengo un conflicto con un vecino?')">
+
+                <span class="topic-icon">
+                    🤝
+                </span>
+
+                <span>
+                    Convivencia
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Cómo se deben manejar los residuos y la basura?')">
+
+                <span class="topic-icon">
+                    ♻️
+                </span>
+
+                <span>
+                    Residuos
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Cuáles son las normas para el uso de zonas comunes?')">
+
+                <span class="topic-icon">
+                    🏢
+                </span>
+
+                <span>
+                    Zonas comunes
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué normas existen para los parqueaderos?')">
+
+                <span class="topic-icon">
+                    🚗
+                </span>
+
+                <span>
+                    Parqueaderos
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué reglas existen para hacer reparaciones u obras?')">
+
+                <span class="topic-icon">
+                    🔧
+                </span>
+
+                <span>
+                    Reparaciones
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué debo hacer en caso de una emergencia?')">
+
+                <span class="topic-icon">
+                    🚨
+                </span>
+
+                <span>
+                    Emergencias
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué normas regulan la propiedad horizontal?')">
+
+                <span class="topic-icon">
+                    ⚖️
+                </span>
+
+                <span>
+                    Normatividad
+                </span>
+
+            </button>
+
+
+            <button
+                class="topic"
+                type="button"
+                onclick="preguntaRapida('¿Qué información contiene el manual de convivencia?')">
+
+                <span class="topic-icon">
+                    📖
+                </span>
+
+                <span>
+                    Manual
+                </span>
+
+            </button>
+
+        </aside>
+
+
+        <!-- =================================================
+             PRINCIPAL
+        ================================================== -->
+
+        <main class="main">
+
+
+            <section class="welcome">
+
+                <h1>
+                    ¿En qué podemos ayudarte?
+                </h1>
+
+                <p>
+                    Consulta información sobre la propiedad
+                    horizontal, convivencia, normatividad
+                    y administración.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHAT
+            ================================================== -->
+
+            <section class="chat-container">
+
+                <div class="chat-card">
+
+
+                    <div class="chat-header">
+
+                        <div class="chat-title">
+
+                            <div class="chat-title-icon">
+                                ▣
+                            </div>
+
+                            <span>
+                                Conversación
+                            </span>
+
+                        </div>
+
+
+                        <div class="chat-status">
+                            Asistente INFINITO 2U
+                        </div>
+
+                    </div>
+
+
+                    <!-- MENSAJES -->
+
+                    <div
+                        class="messages"
+                        id="messages">
+
+                        <div class="message bot">
+
+                            <div class="avatar">
+                                🤖
+                            </div>
+
+                            <div class="message-content">
+
+                                <div class="bubble">¡Hola! 👋
+
+Soy el asistente virtual de INFINITO 2U.
+
+Puedo ayudarte con información sobre residentes, apartamentos, visitantes, mascotas, convivencia, zonas comunes, parqueaderos, reparaciones, emergencias y normatividad.
+
+También puedo consultar información relacionada con los documentos normativos disponibles.
+
+¿En qué puedo ayudarte?</div>
+
+                                <div class="message-time">
+                                    Ahora
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PREGUNTAS RÁPIDAS -->
+
+                    <div class="quick-area">
+
+                        <div class="quick-title">
+                            Preguntas frecuentes
+                        </div>
+
+
+                        <div class="quick-buttons">
+
+                            <button
+                                class="quick-button"
+                                type="button"
+                                onclick="preguntaRapida('¿Qué reglas existen para las mascotas?')">
+
+                                🐾 Reglas para mascotas
+
+                            </button>
+
+
+                            <button
+                                class="quick-button"
+                                type="button"
+                                onclick="preguntaRapida('¿Cómo registrar un residente?')">
+
+                                👥 Registrar residente
+
+                            </button>
+
+
+                            <button
+                                class="quick-button"
+                                type="button"
+                                onclick="preguntaRapida('¿Qué normas deben cumplir los visitantes?')">
+
+                                🚪 Normas visitantes
+
+                            </button>
+
+
+                            <button
+                                class="quick-button"
+                                type="button"
+                                onclick="preguntaRapida('¿Qué dice la Ley 675 sobre las cuotas de administración?')">
+
+                                ⚖️ Ley 675 y cuotas
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INPUT -->
+
+                    <div class="input-area">
+
+                        <div class="input-box">
+
+                            <input
+                                type="text"
+                                id="pregunta"
+                                maxlength="1000"
+                                autocomplete="off"
+                                placeholder="Escribe tu pregunta..."
+                            >
+
+
+                            <button
+                                class="send-button"
+                                id="sendButton"
+                                type="button"
+                                onclick="enviarPregunta()"
+                                title="Enviar">
+
+                                ➤
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="input-help">
+                            Presiona Enter para enviar • Máximo 1000 caracteres
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================================================
+       ELEMENTOS
+    ========================================================= */
+
+    const input =
+        document.getElementById("pregunta");
+
+    const messages =
+        document.getElementById("messages");
+
+    const sendButton =
+        document.getElementById("sendButton");
+
+
+    /* =========================================================
+       HORA
+    ========================================================= */
+
+    function obtenerHora() {
+
+        const ahora =
+            new Date();
+
+        return ahora.toLocaleTimeString(
+            "es-CO",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       AGREGAR MENSAJE
+    ========================================================= */
+
+    function agregarMensaje(
+        texto,
+        tipo
+    ) {
+
+        const message =
+            document.createElement(
+                "div"
+            );
+
+        message.className =
+            "message " + tipo;
+
+
+        const avatar =
+            document.createElement(
+                "div"
+            );
+
+        avatar.className =
+            "avatar";
+
+        avatar.textContent =
+            tipo === "bot"
+                ? "🤖"
+                : "👤";
+
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+        content.className =
+            "message-content";
+
+
+        const bubble =
+            document.createElement(
+                "div"
+            );
+
+        bubble.className =
+            "bubble";
+
+        bubble.textContent =
+            texto;
+
+
+        const time =
+            document.createElement(
+                "div"
+            );
+
+        time.className =
+            "message-time";
+
+        time.textContent =
+            obtenerHora();
+
+
+        content.appendChild(
+            bubble
+        );
+
+        content.appendChild(
+            time
+        );
+
+
+        if (tipo === "bot") {
+
+            message.appendChild(
+                avatar
+            );
+
+            message.appendChild(
+                content
+            );
+
+        } else {
+
+            message.appendChild(
+                content
+            );
+
+            message.appendChild(
+                avatar
+            );
+
+        }
+
+
+        messages.appendChild(
+            message
+        );
+
+
+        scrollChat();
+
+    }
+
+
+    /* =========================================================
+       ESCRIBIENDO
+    ========================================================= */
+
+    function mostrarEscribiendo() {
+
+        if (
+            document.getElementById(
+                "typingMessage"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const message =
+            document.createElement(
+                "div"
+            );
+
+        message.className =
+            "message bot";
+
+        message.id =
+            "typingMessage";
+
+
+        const avatar =
+            document.createElement(
+                "div"
+            );
+
+        avatar.className =
+            "avatar";
+
+        avatar.textContent =
+            "🤖";
+
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+        content.className =
+            "message-content";
+
+
+        const bubble =
+            document.createElement(
+                "div"
+            );
+
+        bubble.className =
+            "bubble";
+
+
+        const typing =
+            document.createElement(
+                "div"
+            );
+
+        typing.className =
+            "typing";
+
+
+        for (
+            let i = 0;
+            i < 3;
+            i++
+        ) {
+
+            const dot =
+                document.createElement(
+                    "span"
+                );
+
+            typing.appendChild(
+                dot
+            );
+
+        }
+
+
+        bubble.appendChild(
+            typing
+        );
+
+        content.appendChild(
+            bubble
+        );
+
+        message.appendChild(
+            avatar
+        );
+
+        message.appendChild(
+            content
+        );
+
+        messages.appendChild(
+            message
+        );
+
+
+        scrollChat();
+
+    }
+
+
+    /* =========================================================
+       OCULTAR ESCRIBIENDO
+    ========================================================= */
+
+    function ocultarEscribiendo() {
+
+        const typing =
+            document.getElementById(
+                "typingMessage"
+            );
+
+        if (typing) {
+
+            typing.remove();
+
+        }
+
+    }
+
+
+    /* =========================================================
+       SCROLL
+    ========================================================= */
+
+    function scrollChat() {
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }
+
+
+    /* =========================================================
+       ENVIAR PREGUNTA
+    ========================================================= */
+
+    async function enviarPregunta() {
+
+        const pregunta =
+            input.value.trim();
+
+
+        if (!pregunta) {
+
+            input.focus();
+
+            return;
+
+        }
+
+
+        if (pregunta.length > 1000) {
+
+            agregarMensaje(
+                "La pregunta no puede superar los 1000 caracteres.",
+                "bot"
+            );
+
+            return;
+
+        }
+
+
+        agregarMensaje(
+            pregunta,
+            "user"
+        );
+
+
+        input.value = "";
+
+        input.disabled = true;
+
+        sendButton.disabled = true;
+
+
+        mostrarEscribiendo();
+
+
+        try {
+
+            const respuesta =
+                await fetch(
+                    "{{ url_for('api_chatbot') }}",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+                        },
+
+                        credentials: "same-origin",
+
+                        body: JSON.stringify({
+                            pregunta:
+                                pregunta
+                        })
+                    }
+                );
+
+
+            let data = null;
+
+
+            try {
+
+                data =
+                    await respuesta.json();
+
+            } catch (
+                jsonError
+            ) {
+
+                console.error(
+                    "Error leyendo JSON:",
+                    jsonError
+                );
+
+            }
+
+
+            ocultarEscribiendo();
+
+
+            if (!respuesta.ok) {
+
+                if (
+                    data &&
+                    data.respuesta
+                ) {
+
+                    agregarMensaje(
+                        data.respuesta,
+                        "bot"
+                    );
+
+                } else {
+
+                    agregarMensaje(
+                        "No fue posible procesar la consulta. Verifica que hayas iniciado sesión.",
+                        "bot"
+                    );
+
+                }
+
+                return;
+
+            }
+
+
+            if (
+                data &&
+                data.ok === true &&
+                data.respuesta
+            ) {
+
+                agregarMensaje(
+                    data.respuesta,
+                    "bot"
+                );
+
+            } else if (
+                data &&
+                data.respuesta
+            ) {
+
+                agregarMensaje(
+                    data.respuesta,
+                    "bot"
+                );
+
+            } else {
+
+                agregarMensaje(
+                    "No encontré una respuesta para esa consulta. Intenta formular la pregunta de otra manera.",
+                    "bot"
+                );
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Error chatbot:",
+                error
+            );
+
+
+            ocultarEscribiendo();
+
+
+            agregarMensaje(
+                "⚠️ No se pudo conectar con el asistente. Verifica que el servidor de INFINITO 2U esté funcionando.",
+                "bot"
+            );
+
+        }
+
+
+        input.disabled = false;
+
+        sendButton.disabled = false;
+
+        input.focus();
+
+    }
+
+
+    /* =========================================================
+       PREGUNTA RÁPIDA
+    ========================================================= */
+
+    function preguntaRapida(
+        texto
+    ) {
+
+        if (
+            input.disabled
+        ) {
+
+            return;
+
+        }
+
+
+        input.value =
+            texto;
+
+        input.focus();
+
+        enviarPregunta();
+
+    }
+
+
+    /* =========================================================
+       ENTER
+    ========================================================= */
+
+    input.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+                && !event.shiftKey
+            ) {
+
+                event.preventDefault();
+
+                enviarPregunta();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       VOLVER
+    ========================================================= */
+
+    function volver() {
+
+        window.location.href =
+            "{{ url_for('panel_usuario') }}";
+
+    }
+
+
+    /* =========================================================
+       ACTIVAR TEMA
+    ========================================================= */
+
+    document
+        .querySelectorAll(
+            ".topic"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .querySelectorAll(
+                                ".topic"
+                            )
+                            .forEach(
+                                function(item) {
+
+                                    item.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =========================================================
+       INICIO
+    ========================================================= */
+
+    window.addEventListener(
+        "load",
+        function() {
+
+            input.focus();
+
+            scrollChat();
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>

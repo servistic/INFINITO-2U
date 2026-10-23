@@ -1,0 +1,546 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITO 2U - Manuales</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(
+                135deg,
+                #f4f7fb,
+                #e8eef7
+            );
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        /* =====================================================
+           ENCABEZADO
+           ===================================================== */
+
+        .encabezado {
+
+            background: linear-gradient(
+                135deg,
+                #123c69,
+                #1769aa
+            );
+
+            color: white;
+            padding: 22px 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.18);
+        }
+
+        .titulo {
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .titulo .icono {
+
+            width: 52px;
+            height: 52px;
+
+            background: white;
+            color: #1769aa;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+
+            box-shadow:
+                0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .titulo h1 {
+
+            font-size: 27px;
+            font-weight: 700;
+        }
+
+        .titulo p {
+
+            margin-top: 4px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* =====================================================
+           BOTÓN VOLVER
+           ===================================================== */
+
+        .btn-volver {
+
+            border: none;
+            background: white;
+            color: #123c69;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            text-decoration: none;
+
+            display: inline-block;
+        }
+
+        .btn-volver:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 12px rgba(0,0,0,0.18);
+        }
+
+        /* =====================================================
+           CONTENEDOR
+           ===================================================== */
+
+        .contenedor {
+
+            width: 92%;
+            max-width: 1250px;
+
+            margin: 35px auto;
+        }
+
+        .bienvenida {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .bienvenida h2 {
+
+            color: #123c69;
+            margin-bottom: 9px;
+        }
+
+        .bienvenida p {
+
+            color: #5f6b7a;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           GRID
+           ===================================================== */
+
+        .manuales {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(340px, 1fr));
+
+            gap: 25px;
+        }
+
+        /* =====================================================
+           TARJETA
+           ===================================================== */
+
+        .manual {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 7px 22px rgba(0,0,0,0.10);
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-height: 360px;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .manual:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 28px rgba(0,0,0,0.16);
+        }
+
+        /* =====================================================
+           ICONO PDF
+           ===================================================== */
+
+        .pdf-icono {
+
+            width: 70px;
+            height: 70px;
+
+            border-radius: 16px;
+
+            background: #e53935;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 31px;
+
+            margin-bottom: 18px;
+
+            box-shadow:
+                0 5px 12px rgba(229,57,53,0.25);
+        }
+
+        .manual h3 {
+
+            color: #123c69;
+
+            font-size: 20px;
+
+            line-height: 1.35;
+
+            margin-bottom: 12px;
+        }
+
+        .manual p {
+
+            color: #626f7d;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            flex: 1;
+        }
+
+        /* =====================================================
+           BOTÓN CONSULTAR
+           ===================================================== */
+
+        .btn-consultar {
+
+            display: block;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            background: linear-gradient(
+                135deg,
+                #1769aa,
+                #0d47a1
+            );
+
+            color: white;
+
+            padding: 13px 18px;
+
+            border-radius: 11px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            margin-top: 22px;
+
+            transition: 0.2s;
+
+            cursor: pointer;
+
+            border: none;
+        }
+
+        .btn-consultar:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 13px rgba(23,105,170,0.3);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .encabezado {
+
+                padding: 18px;
+
+                gap: 15px;
+            }
+
+            .titulo h1 {
+
+                font-size: 20px;
+            }
+
+            .titulo p {
+
+                font-size: 12px;
+            }
+
+            .titulo .icono {
+
+                width: 44px;
+                height: 44px;
+
+                font-size: 23px;
+            }
+
+            .btn-volver {
+
+                padding: 9px 12px;
+
+                font-size: 12px;
+            }
+
+            .contenedor {
+
+                width: 94%;
+
+                margin: 22px auto;
+            }
+
+            .manuales {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     ENCABEZADO
+     ========================================================= -->
+
+<header class="encabezado">
+
+    <div class="titulo">
+
+        <div class="icono">
+            📚
+        </div>
+
+        <div>
+
+            <h1>
+                MANUALES
+            </h1>
+
+            <p>
+                Documentación de INFINITO 2U
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         VOLVER SEGÚN EL USUARIO
+         ===================================================== -->
+
+    {% if session.get("rol") == "admin" %}
+
+        <a
+            href="{{ url_for('panel_admin') }}"
+            class="btn-volver">
+
+            ← Volver
+
+        </a>
+
+    {% else %}
+
+        <a
+            href="{{ url_for('panel_residente') }}"
+            class="btn-volver">
+
+            ← Volver
+
+        </a>
+
+    {% endif %}
+
+</header>
+
+
+
+<!-- =========================================================
+     CONTENIDO
+     ========================================================= -->
+
+<main class="contenedor">
+
+
+    <section class="bienvenida">
+
+        <h2>
+            Manuales de INFINITO 2U
+        </h2>
+
+        <p>
+
+            Consulta los documentos disponibles para conocer
+            las normas de convivencia, el uso adecuado de las
+            zonas comunes y los aspectos jurídicos relacionados
+            con el Comité de Convivencia de la Propiedad Horizontal.
+
+        </p>
+
+    </section>
+
+
+
+    <section class="manuales">
+
+
+        <!-- =================================================
+             MANUAL DE CONVIVENCIA
+             ================================================= -->
+
+        <article class="manual">
+
+            <div class="pdf-icono">
+                📕
+            </div>
+
+            <h3>
+
+                Manual de Convivencia y Uso de Zonas Comunes
+                – INFINITO 2U
+
+            </h3>
+
+            <p>
+
+                Documento orientado a la convivencia,
+                comportamiento de los residentes y uso adecuado
+                de las zonas comunes de la propiedad horizontal.
+
+            </p>
+
+
+            <!-- CORREGIDO -->
+
+            <a
+                href="{{ url_for('manual_convivencia') }}"
+                class="btn-consultar">
+
+                📖 Consultar manual
+
+            </a>
+
+        </article>
+
+
+
+        <!-- =================================================
+             MANUAL JURÍDICO
+             ================================================= -->
+
+        <article class="manual">
+
+            <div class="pdf-icono">
+                📘
+            </div>
+
+            <h3>
+
+                Manual Jurídico del Comité de Convivencia PH
+                – INFINITO Segunda 2 Roma Kennedy
+
+            </h3>
+
+            <p>
+
+                Documento de consulta sobre los aspectos
+                jurídicos, funciones y procedimientos relacionados
+                con el Comité de Convivencia de la Propiedad
+                Horizontal.
+
+            </p>
+
+
+            <!-- CORREGIDO -->
+
+            <a
+                href="{{ url_for('manual_juridico') }}"
+                class="btn-consultar">
+
+                📖 Consultar manual
+
+            </a>
+
+        </article>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>
+```

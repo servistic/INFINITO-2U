@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITO 2U - Administrador</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/paneles.css') }}">
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     BARRA SUPERIOR
+====================================================== -->
+
+<header class="barra-superior">
+
+    <div class="marca">
+
+        <img
+            src="{{ url_for('assets', filename='Logo.jpeg') }}"
+            alt="INFINITO 2U"
+        >
+
+        <div>
+
+            <h1>INFINITO 2U</h1>
+
+            <span>
+                PANEL DE ADMINISTRADOR
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="usuario-activo">
+
+        <span>
+            👤 Administrador
+        </span>
+
+        <strong>
+            {{ usuario }}
+        </strong>
+
+        <a href="{{ url_for('logout') }}">
+            CERRAR SESIÓN
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+====================================================== -->
+
+<main class="contenido">
+
+    <div class="bienvenida">
+
+        <h2>
+            Panel de Administración
+        </h2>
+
+        <p>
+            Gestión general de la propiedad horizontal
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         TARJETAS ADMINISTRADOR
+    ================================================== -->
+
+    <section class="tarjetas">
+
+
+        <!-- =================================================
+             RESIDENTES
+        ================================================== -->
+
+        <a href="{{ url_for('residentes') }}"
+           class="tarjeta residentes">
+
+            <div class="icono">
+                👥
+            </div>
+
+            <h3>
+                RESIDENTES
+            </h3>
+
+            <p>
+                Gestionar residentes
+            </p>
+
+        </a>
+
+
+        <!-- =================================================
+             APARTAMENTOS
+        ================================================== -->
+
+        <a href="{{ url_for('apartamentos') }}"
+           class="tarjeta apartamentos">
+
+            <div class="icono">
+                🏢
+            </div>
+
+            <h3>
+                APARTAMENTOS
+            </h3>
+
+            <p>
+                Gestionar apartamentos
+            </p>
+
+        </a>
+
+
+        <!-- =================================================
+             MANUAL INTERACTIVO
+        ================================================== -->
+
+        <a href="{{ url_for('manual_interactivo') }}"
+           class="tarjeta manual">
+
+            <div class="icono">
+                📖
+            </div>
+
+            <h3>
+                MANUAL INTERACTIVO
+            </h3>
+
+            <p>
+                Manual interactivo
+            </p>
+
+        </a>
+
+
+        <!-- =================================================
+             MANUAL COMPLETO
+        ================================================== -->
+
+        <a href="{{ url_for('manual_completo') }}"
+           class="tarjeta manual-completo">
+
+            <div class="icono">
+                📚
+            </div>
+
+            <h3>
+                MANUAL COMPLETO
+            </h3>
+
+            <p>
+                Manual completo
+            </p>
+
+        </a>
+
+
+        <!-- =================================================
+             NORMATIVIDAD
+        ================================================== -->
+
+        <a href="{{ url_for('normatividad') }}"
+           class="tarjeta normatividad">
+
+            <div class="icono">
+                ⚖
+            </div>
+
+            <h3>
+                NORMATIVIDAD
+            </h3>
+
+            <p>
+                Consultar normatividad
+            </p>
+
+        </a>
+
+
+        <!-- =================================================
+             CÓDIGO QR
+        ================================================== -->
+
+        <a href="{{ url_for('codigo_qr') }}"
+           class="tarjeta qr">
+
+            <div class="icono">
+                ▣
+            </div>
+
+            <h3>
+                CÓDIGO QR
+            </h3>
+
+            <p>
+                Códigos QR
+            </p>
+
+        </a>
+
+
+        <!-- =================================================
+             CHATBOT
+        ================================================== -->
+
+        <a href="{{ url_for('chatbot') }}"
+           class="tarjeta chatbot">
+
+            <div class="icono">
+                💬
+            </div>
+
+            <h3>
+                CHATBOT
+            </h3>
+
+            <p>
+                Asistente virtual
+            </p>
+
+        </a>
+
+
+        <!-- =================================================
+             MANUALES
+             Manual de Convivencia + Manual Jurídico
+        ================================================== -->
+
+        <div class="tarjeta manuales">
+
+            <div class="icono">
+                📘
+            </div>
+
+            <h3>
+                MANUALES
+            </h3>
+
+
+            <div class="botones-manuales">
+
+                <a href="{{ url_for('manual_convivencia') }}"
+                   class="boton-manual convivencia">
+
+                    MANUAL DE CONVIVENCIA
+
+                </a>
+
+
+                <a href="{{ url_for('manual_juridico') }}"
+                   class="boton-manual juridico">
+
+                    MANUAL JURÍDICO
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+</body>
+
+</html>

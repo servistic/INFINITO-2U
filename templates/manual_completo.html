@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITO 2U - Manual Completo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #263238;
+        }
+
+        /* =========================
+           ENCABEZADO
+        ========================= */
+
+        .encabezado {
+            background: #173B57;
+            color: white;
+            padding: 25px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .encabezado img {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            background: white;
+            border-radius: 12px;
+            padding: 5px;
+        }
+
+        .encabezado h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .encabezado p {
+            margin: 7px 0 0;
+            opacity: 0.9;
+        }
+
+        /* =========================
+           CONTENEDOR
+        ========================= */
+
+        .contenedor {
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto 60px;
+        }
+
+        .boton-volver {
+            display: inline-block;
+            background: #247BA0;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .boton-volver:hover {
+            background: #173B57;
+        }
+
+        /* =========================
+           TITULO
+        ========================= */
+
+        .titulo-principal {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .titulo-principal h2 {
+            color: #173B57;
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .titulo-principal p {
+            line-height: 1.7;
+        }
+
+        /* =========================
+           RESUMEN
+        ========================= */
+
+        .seccion {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .seccion h2 {
+            color: #173B57;
+            border-bottom: 3px solid #247BA0;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .seccion h3 {
+            color: #247BA0;
+            margin-top: 25px;
+        }
+
+        .seccion p {
+            line-height: 1.7;
+        }
+
+        .seccion li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .tarjeta {
+            border-left: 6px solid #247BA0;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .tarjeta h3 {
+            margin-top: 0;
+            color: #173B57;
+        }
+
+        /* =========================
+           INFORMACION GENERAL
+        ========================= */
+
+        .datos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .dato {
+            background: #eef2f5;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .dato strong {
+            color: #173B57;
+        }
+
+        /* =========================
+           TABLA SANCIONES
+        ========================= */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #173B57;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dce3e9;
+        }
+
+        tr:nth-child(even) {
+            background: #f5f7fa;
+        }
+
+        /* =========================
+           PDF
+        ========================= */
+
+        .pdf-seccion {
+            margin-top: 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .pdf-seccion h2 {
+            color: #173B57;
+            margin-top: 0;
+            border-bottom: 3px solid #F28C28;
+            padding-bottom: 12px;
+        }
+
+        .pdf-descripcion {
+            background: #fff0dd;
+            border-left: 5px solid #F28C28;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .visor-pdf {
+            width: 100%;
+            height: 900px;
+            border: 1px solid #dce3e9;
+            border-radius: 10px;
+            background: #eef2f5;
+        }
+
+        .boton-pdf {
+            display: inline-block;
+            margin-top: 15px;
+            background: #F28C28;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .boton-pdf:hover {
+            background: #d97618;
+        }
+
+        /* =========================
+           PIE
+        ========================= */
+
+        .pie {
+            background: #173B57;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .pie p {
+            margin: 5px;
+        }
+
+        /* =========================
+           MOVIL
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .encabezado {
+                padding: 20px;
+            }
+
+            .encabezado h1 {
+                font-size: 22px;
+            }
+
+            .contenedor {
+                width: 95%;
+            }
+
+            .visor-pdf {
+                height: 650px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
+
+    <header class="encabezado">
+
+        <img
+            src="{{ url_for('assets', filename='Logo.jpeg') }}"
+            alt="Logo INFINITO 2U"
+        >
+
+        <div>
+            <h1>INFINITO 2U</h1>
+            <p>Manual de Convivencia y Uso de Zonas Comunes</p>
+        </div>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <!-- BOTON VOLVER -->
+
+        <a href="{{ url_for('panel_admin') }}" class="boton-volver">
+            ← Volver al panel
+        </a>
+
+
+        <!-- =================================================
+             TITULO
+        ================================================== -->
+
+        <section class="titulo-principal">
+
+            <h2>📘 Manual Completo</h2>
+
+            <p>
+                Este apartado presenta un resumen de los principales
+                aspectos del Manual de Convivencia y Uso de Zonas
+                Comunes de la copropiedad.
+            </p>
+
+            <p>
+                Al finalizar el resumen se encuentra disponible el
+                <strong>documento completo en PDF</strong>, conservando
+                el contenido original del manual.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             I. PRESENTACIÓN
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>I. Presentación</h2>
+
+            <p>
+                El Manual de Convivencia y Uso de Zonas Comunes tiene
+                como finalidad establecer orientaciones para la
+                convivencia entre propietarios, residentes,
+                visitantes y demás personas que hagan uso de la
+                copropiedad.
+            </p>
+
+            <p>
+                El manual busca promover el respeto, la tranquilidad,
+                la seguridad, la solidaridad y el adecuado uso de los
+                bienes privados y comunes.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             II. DATOS GENERALES
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>II. Datos generales de la copropiedad</h2>
+
+            <div class="datos">
+
+                <div class="dato">
+                    <strong>Copropiedad:</strong><br>
+                    Conjunto Residencial PH Infinito P.H.
+                </div>
+
+                <div class="dato">
+                    <strong>Dirección:</strong><br>
+                    Calle 57C Sur No. 77K-20
+                </div>
+
+                <div class="dato">
+                    <strong>Barrio:</strong><br>
+                    Nueva Roma
+                </div>
+
+                <div class="dato">
+                    <strong>Localidad:</strong><br>
+                    Kennedy, Bogotá D.C.
+                </div>
+
+                <div class="dato">
+                    <strong>NIT:</strong><br>
+                    800.035.031-1
+                </div>
+
+                <div class="dato">
+                    <strong>Apartamentos:</strong><br>
+                    90 unidades
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             III - V
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>III. Principios, derechos y deberes</h2>
+
+            <div class="tarjetas">
+
+                <div class="tarjeta">
+
+                    <h3>🤝 Principios de convivencia</h3>
+
+                    <ul>
+                        <li>Respeto.</li>
+                        <li>Tolerancia.</li>
+                        <li>Solidaridad.</li>
+                        <li>Buena convivencia.</li>
+                        <li>Tranquilidad.</li>
+                        <li>Uso responsable de las zonas comunes.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>⚖️ Derechos</h3>
+
+                    <ul>
+                        <li>Disfrutar de los bienes privados y comunes.</li>
+                        <li>Participar en la Asamblea.</li>
+                        <li>Elegir y ser elegido.</li>
+                        <li>Presentar PQRS.</li>
+                        <li>Recibir información de la administración.</li>
+                        <li>Disfrutar de seguridad y tranquilidad.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>📋 Deberes</h3>
+
+                    <ul>
+                        <li>Cumplir el reglamento de propiedad horizontal.</li>
+                        <li>Pagar las cuotas correspondientes.</li>
+                        <li>Cuidar las zonas comunes.</li>
+                        <li>Respetar a vecinos y visitantes.</li>
+                        <li>Cumplir las decisiones de los órganos de administración.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             VI - VIII
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>VI. Administración y convivencia</h2>
+
+            <h3>Órganos de administración</h3>
+
+            <ul>
+                <li>Asamblea General.</li>
+                <li>Consejo de Administración.</li>
+                <li>Administrador.</li>
+            </ul>
+
+            <h3>Comité de Convivencia</h3>
+
+            <p>
+                El Comité de Convivencia tiene como finalidad apoyar
+                la solución pacífica de conflictos, promover acuerdos
+                y desarrollar actividades que favorezcan la convivencia.
+            </p>
+
+            <p>
+                Su función es de orientación y mediación y no corresponde
+                a este órgano imponer sanciones.
+            </p>
+
+            <h3>Seguridad y portería</h3>
+
+            <ul>
+                <li>Los visitantes deben ser autorizados por el residente.</li>
+                <li>Los domicilios y entregas deben estar controlados y registrados.</li>
+                <li>Los contratistas deben identificarse en la portería.</li>
+                <li>Se recomienda informar a la administración sobre ausencias prolongadas.</li>
+            </ul>
+
+        </section>
+
+
+        <!-- =================================================
+             IX - XIII
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>IX. Uso de zonas comunes</h2>
+
+            <div class="tarjetas">
+
+                <div class="tarjeta">
+
+                    <h3>🚗 Parqueaderos</h3>
+
+                    <ul>
+                        <li>Utilizar únicamente espacios autorizados.</li>
+                        <li>Respetar la señalización.</li>
+                        <li>Mantener una velocidad segura.</li>
+                        <li>No realizar reparaciones mayores.</li>
+                        <li>No utilizar el parqueadero como bodega.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🏍️ Parqueaderos de motocicletas</h3>
+
+                    <p>
+                        Los espacios destinados para motocicletas deben
+                        utilizarse exclusivamente para este fin,
+                        respetando las zonas asignadas y los recorridos
+                        peatonales.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🚲 Bicicleteros</h3>
+
+                    <p>
+                        Los bicicleteros están destinados exclusivamente
+                        al estacionamiento de bicicletas. Se recomienda
+                        utilizar elementos de seguridad.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🏠 Salón social</h3>
+
+                    <ul>
+                        <li>Realizar la reserva previamente.</li>
+                        <li>Respetar el horario autorizado.</li>
+                        <li>Entregar el espacio limpio.</li>
+                        <li>Responder por los daños ocasionados.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🌳 Zonas verdes</h3>
+
+                    <p>
+                        Deben utilizarse para circulación, descanso y
+                        actividades familiares moderadas, evitando
+                        daños a jardines, residuos y actividades que
+                        puedan deteriorarlas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             XIV - XVIII
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>XIV. Manejo de residuos</h2>
+
+            <ul>
+                <li>
+                    <strong>Bolsa blanca:</strong>
+                    cartón, papel, plástico y vidrio aprovechable.
+                </li>
+
+                <li>
+                    <strong>Bolsa negra:</strong>
+                    residuos no aprovechables, como papel higiénico
+                    y servilletas contaminadas.
+                </li>
+
+                <li>
+                    <strong>Bolsa verde:</strong>
+                    residuos orgánicos.
+                </li>
+            </ul>
+
+
+            <h2>XV. Tenencia responsable de mascotas</h2>
+
+            <ul>
+                <li>Mantener las mascotas bajo control.</li>
+                <li>Utilizar correa cuando corresponda.</li>
+                <li>Recoger inmediatamente sus excrementos.</li>
+                <li>Mantener sus vacunas y cuidados.</li>
+                <li>Evitar situaciones de agresión o riesgo.</li>
+            </ul>
+
+
+            <h2>XVI. Trasteos</h2>
+
+            <p>
+                Los trasteos requieren solicitud previa y coordinación
+                con la administración. Deben realizarse dentro de los
+                horarios autorizados.
+            </p>
+
+            <p>
+                Los domingos y días festivos se encuentran prohibidos
+                según las disposiciones del manual.
+            </p>
+
+
+            <h2>XVII. Fachadas y ventanas</h2>
+
+            <ul>
+                <li>No colgar ropa en lugares visibles desde el exterior.</li>
+                <li>No instalar avisos sin autorización.</li>
+                <li>No realizar modificaciones no autorizadas.</li>
+            </ul>
+
+
+            <h2>XVIII. Reparaciones locativas</h2>
+
+            <p>
+                Las reparaciones deben realizarse respetando los
+                horarios establecidos por la copropiedad y las
+                disposiciones relacionadas con ruido y tranquilidad.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             XIX - XXI
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>XIX. Protección de niños y adolescentes</h2>
+
+            <p>
+                Los padres, acudientes o responsables deben velar por
+                la seguridad y comportamiento de los menores de edad
+                durante el uso de las zonas comunes.
+            </p>
+
+
+            <h2>XX. Plan de emergencias</h2>
+
+            <ul>
+                <li>Conocer las rutas de evacuación.</li>
+                <li>Identificar los puntos de encuentro.</li>
+                <li>Participar en simulacros.</li>
+                <li>Conocer los equipos de emergencia.</li>
+                <li>Seguir las instrucciones de la brigada.</li>
+            </ul>
+
+
+            <h2>XXI. PQRS</h2>
+
+            <p>
+                Los residentes pueden presentar peticiones, quejas,
+                reclamos y sugerencias mediante los canales establecidos
+                por la administración.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             XXII - XXV
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>XXII. Régimen disciplinario</h2>
+
+            <p>
+                Las actuaciones relacionadas con posibles incumplimientos
+                deben respetar el debido proceso, el derecho a la defensa,
+                la legalidad y la proporcionalidad.
+            </p>
+
+
+            <h2>XXIII. Ejemplos de sanciones</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Situación</th>
+                        <th>Medida</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Ruido excesivo</td>
+                        <td>Llamado de atención</td>
+                    </tr>
+
+                    <tr>
+                        <td>Basuras en zonas comunes</td>
+                        <td>Llamado escrito</td>
+                    </tr>
+
+                    <tr>
+                        <td>Mal uso del parqueadero</td>
+                        <td>Sanción reglamentaria</td>
+                    </tr>
+
+                    <tr>
+                        <td>Daños a bienes comunes</td>
+                        <td>Reparación y sanción</td>
+                    </tr>
+
+                    <tr>
+                        <td>Agresión verbal</td>
+                        <td>Comité de Convivencia</td>
+                    </tr>
+
+                    <tr>
+                        <td>Agresión física</td>
+                        <td>Autoridad competente</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <h2>XXIV. Formatos</h2>
+
+            <ul>
+                <li>Formato de PQRS.</li>
+                <li>Registro de residentes.</li>
+                <li>Reserva del salón social.</li>
+                <li>Solicitud de trasteo.</li>
+                <li>Registro de mascotas.</li>
+                <li>Acta de compromiso.</li>
+                <li>Llamado de atención.</li>
+            </ul>
+
+
+            <h2>XXV. Directorio de emergencias</h2>
+
+            <ul>
+                <li><strong>Emergencias:</strong> 123</li>
+                <li><strong>Bomberos Bogotá:</strong> 119</li>
+                <li><strong>Ambulancias:</strong> 123</li>
+                <li>Acueducto: canales oficiales.</li>
+                <li>Enel: canales oficiales.</li>
+                <li>Administración: canales oficiales.</li>
+            </ul>
+
+        </section>
+
+
+        <!-- =================================================
+             ANEXO
+        ================================================== -->
+
+        <section class="seccion">
+
+            <h2>ANEXO. Zonas de la copropiedad</h2>
+
+            <p>
+                La copropiedad cuenta con diferentes espacios y zonas
+                destinadas al uso de residentes y visitantes.
+            </p>
+
+            <div class="datos">
+
+                <div class="dato"><strong>Bloques:</strong> 1 al 9</div>
+
+                <div class="dato"><strong>Apartamentos:</strong> 90</div>
+
+                <div class="dato"><strong>Parqueaderos:</strong> 36</div>
+
+                <div class="dato"><strong>Motocicletas:</strong> 24 espacios</div>
+
+                <div class="dato"><strong>Salón social</strong></div>
+
+                <div class="dato"><strong>Bicicleteros</strong></div>
+
+                <div class="dato"><strong>Portería principal</strong></div>
+
+                <div class="dato"><strong>Cuarto de residuos</strong></div>
+
+                <div class="dato"><strong>Zonas verdes</strong></div>
+
+                <div class="dato"><strong>Senderos peatonales</strong></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PDF COMPLETO
+        ================================================== -->
+
+        <section class="pdf-seccion">
+
+            <h2>📄 Documento completo en PDF</h2>
+
+            <div class="pdf-descripcion">
+
+                <strong>Documento oficial completo</strong>
+
+                <p>
+                    A continuación se encuentra el documento completo
+                    del <strong>Manual de Convivencia y Uso de Zonas
+                    Comunes de INFINITO 2U</strong>.
+                </p>
+
+                <p>
+                    Puedes desplazarte por todas sus páginas directamente
+                    desde este visor.
+                </p>
+
+            </div>
+
+
+            <iframe
+                class="visor-pdf"
+                src="{{ url_for('assets', filename='manual_convivencia_infinito2u.pdf') }}"
+                title="Manual de Convivencia y Uso de Zonas Comunes">
+            </iframe>
+
+
+            <a
+                class="boton-pdf"
+                href="{{ url_for('assets', filename='manual_convivencia_infinito2u.pdf') }}"
+                target="_blank">
+                📄 Abrir PDF completo
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         PIE
+    ====================================================== -->
+
+    <footer class="pie">
+
+        <p><strong>INFINITO 2U</strong></p>
+
+        <p>
+            Sistema de gestión de propiedad horizontal
+        </p>
+
+        <p>
+            Manual de Convivencia y Uso de Zonas Comunes
+        </p>
+
+    </footer>
+
+</body>
+</html>

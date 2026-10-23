@@ -1,0 +1,251 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║           CHECKLIST DE DEPLOYMENT A RENDER - INFINITO-2U                  ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+PREPARACIÓN LOCAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] Verificar que la carpeta /home/desarrollo/INFINITO-2U existe
+  [ ] Verificar que tengas los siguientes archivos:
+      [ ] app.py
+      [ ] base_datos.py
+      [ ] chatbot.py
+      [ ] requirements.txt (NUEVO)
+      [ ] Procfile (NUEVO)
+      [ ] .env (NUEVO)
+      [ ] build.sh (NUEVO)
+      [ ] infinito2u.db (NUEVO - creada automáticamente)
+  
+  [ ] Archivos de documentación:
+      [ ] DEPLOYMENT_QUICK_START.md (léelo antes de continuar)
+      [ ] DEPLOY_RENDER.md
+  
+  [ ] Verificar que app.py fue modificado:
+      [ ] Tiene "import crear_base_datos"
+      [ ] Tiene "from dotenv import load_dotenv"
+      [ ] Tiene "host='0.0.0.0'" en app.run()
+      [ ] Tiene variable PORT desde entorno
+
+
+GITHUB - PREPARACIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] Tener cuenta en GitHub (https://github.com)
+  [ ] Crear repositorio "INFINITO-2U" (o similar)
+  [ ] Copiar URL del repositorio:
+      URL: ___________________________________________________________
+
+
+GITHUB - SUBIR CÓDIGO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ejecutar en terminal (en /home/desarrollo/INFINITO-2U):
+
+  [ ] cd /home/desarrollo/INFINITO-2U
+  
+  [ ] git init
+  
+  [ ] git add .
+  
+  [ ] git commit -m "INFINITO-2U listo para Render"
+  
+  [ ] git remote add origin https://github.com/TU_USUARIO/INFINITO-2U.git
+      (Cambiar TU_USUARIO por tu usuario de GitHub)
+  
+  [ ] git branch -M main
+  
+  [ ] git push -u origin main
+      (Te pedirá usuario/contraseña o token de GitHub)
+
+
+RENDER - PREPARACIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] Ir a https://render.com
+  
+  [ ] Crear cuenta (Sign Up)
+  
+  [ ] Conectar con GitHub
+  
+  [ ] Autorizar acceso a repositorios
+
+
+RENDER - CREAR WEB SERVICE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+En Dashboard de Render:
+
+  [ ] Clickear "New +" en esquina superior izquierda
+  
+  [ ] Seleccionar "Web Service"
+  
+  [ ] Conectar con GitHub (si no está conectado)
+  
+  [ ] Seleccionar repositorio "INFINITO-2U"
+  
+  [ ] Configurar los siguientes campos:
+  
+      [ ] Name: infinito-2u
+      
+      [ ] Environment: Python 3
+      
+      [ ] Build Command:
+          pip install -r requirements.txt && python -c "from base_datos import crear_base_datos; crear_base_datos()"
+      
+      [ ] Start Command:
+          gunicorn app:app
+      
+      [ ] Plan: Free (para exposición)
+
+
+RENDER - VARIABLES DE ENTORNO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DESPUÉS de crear el servicio (en Settings → Environment):
+
+  [ ] Clickear "Add Environment Variable"
+  
+  [ ] Agregar estas variables:
+  
+      [ ] FLASK_ENV = production
+      
+      [ ] SECRET_KEY = infinito_2u_secret_key_exposicion_2024
+      
+      [ ] DEBUG = False
+      
+      [ ] PORT = 10000
+
+
+RENDER - DEPLOY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] Clickear "Create Web Service"
+  
+  [ ] Esperar a que aparezca "=====  Build successful"
+      (Esto toma 2-3 minutos)
+  
+  [ ] Ver la URL pública que genera Render
+      URL: https://infinito-2u.onrender.com
+      (O similar - aparece en la esquina superior izquierda)
+
+
+TESTING - VERIFICAR QUE FUNCIONA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] Abrir URL en navegador (esperar 5 seg en primera carga)
+  
+  [ ] Debería mostrar página de login
+  
+  [ ] Intentar login:
+      Usuario: admin
+      Contraseña: admin123
+  
+  [ ] Verificar que funciona:
+      [ ] Login exitoso
+      [ ] Panel admin se carga
+      [ ] Puede navegar el menú
+      [ ] Chatbot responde
+      [ ] Normatividad se carga
+
+
+EXPOSICIÓN - PREPARACIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] Copiar URL de Render en tus diapositivas
+  
+  [ ] Hacer prueba de conexión (algunos minutos antes)
+  
+  [ ] Tener versión local de respaldo en tu laptop
+  
+  [ ] Tener internet estable en el aula
+  
+  [ ] Informar a profesores:
+      "La aplicación está en línea en: https://infinito-2u.onrender.com"
+      Usuario: admin
+      Contraseña: admin123
+
+
+DESPUÉS DE LA EXPOSICIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] Cambiar contraseña de admin (CRÍTICO POR SEGURIDAD)
+  
+  [ ] Leer REPORTE_SEGURIDAD.md (en carpeta análisis)
+  
+  [ ] Implementar correcciones de seguridad:
+      [ ] Hash de contraseñas
+      [ ] Validación de entrada
+      [ ] Rate limiting
+      [ ] Variables de entorno permanentes
+  
+  [ ] Migrar a PostgreSQL (si quieres datos permanentes)
+  
+  [ ] Agregar tests
+  
+  [ ] Documentar el código
+
+
+PROBLEMAS COMUNES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problema: "Module not found"
+Solución: Verificar que requirements.txt tiene todas las dependencias
+          pip freeze > requirements.txt (en tu máquina local)
+
+Problema: "Build failed"
+Solución: Ver logs en Render Dashboard
+          Buscar mensaje de error
+
+Problema: "Application Error - 503"
+Solución: Esperar 1-2 minutos (Render puede estar reiniciando)
+          Recargar página
+
+Problema: "Database locked"
+Solución: Reiniciar aplicación en Render Dashboard
+          O esperar unos minutos
+
+Problema: "Timeout"
+Solución: Primera carga puede tardar 5 segundos
+          Es normal - después es más rápido
+
+
+CONTACTO / SOPORTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Render Docs:      https://render.com/docs
+Render Status:    https://render-status.com/
+Render Support:   https://render.com/support
+Flask Docs:       https://flask.palletsprojects.com/
+
+
+TIEMPO ESTIMADO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Preparación:           10 minutos
+GitHub:                5 minutos
+Crear Render:          3 minutos
+Configurar servicio:   5 minutos
+Deploy:                3-4 minutos
+Testing:               5 minutos
+────────────────────────────────
+TOTAL:                 31-35 minutos
+
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║            ✅ AL COMPLETAR TODO: PROYECTO EN PRODUCCIÓN                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Cuando termines, habrás publicado:
+✓ Aplicación web funcional en URL pública
+✓ Base de datos operativa
+✓ Sistema completo de gestión de condominios
+✓ Listo para exposición universitaria
+
+¡Éxito en tu exposición! 🚀
+
+═══════════════════════════════════════════════════════════════════════════════
+Fecha: 2026-10-23
+Proyecto: INFINITO-2U
+Estado: Listo para Render
+═══════════════════════════════════════════════════════════════════════════════

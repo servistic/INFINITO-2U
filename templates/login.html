@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITO 2U - Inicio de sesión</title>
+
+    <!-- =====================================================
+         HOJA DE ESTILOS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/estilo.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         CONTENEDOR PRINCIPAL
+    ====================================================== -->
+
+    <div class="login-container">
+
+
+        <!-- =================================================
+             PANEL DE LOGIN
+        ================================================== -->
+
+        <div class="login-card">
+
+
+            <!-- =================================================
+                 LOGO
+            ================================================== -->
+
+            <div class="logo-container">
+
+                <img
+                    src="{{ url_for('assets', filename='Logo.jpeg') }}"
+                    alt="Logo INFINITO 2U"
+                    class="logo"
+                >
+
+            </div>
+
+
+            <!-- =================================================
+                 TÍTULO
+            ================================================== -->
+
+            <h1>
+                INFINITO 2U
+            </h1>
+
+
+            <p class="subtitulo">
+                PROPIEDAD HORIZONTAL
+            </p>
+
+
+            <!-- =================================================
+                 FORMULARIO DE LOGIN
+            ================================================== -->
+
+            <form
+                method="POST"
+                action="/login"
+                class="login-form"
+            >
+
+
+                <!-- =================================================
+                     USUARIO
+                ================================================== -->
+
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuario
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Ingrese su usuario"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     CONTRASEÑA
+                ================================================== -->
+
+                <div class="campo">
+
+                    <label for="contrasena">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="contrasena"
+                        name="contrasena"
+                        placeholder="Ingrese su contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTÓN INGRESAR
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="btn-ingresar"
+                >
+
+                    INGRESAR
+
+                </button>
+
+
+            </form>
+
+
+            <!-- =================================================
+                 MENSAJE DE ERROR
+            ================================================== -->
+
+            {% with mensajes = get_flashed_messages() %}
+
+                {% if mensajes %}
+
+                    <div class="mensaje-error">
+
+                        {% for mensaje in mensajes %}
+
+                            <p>
+                                {{ mensaje }}
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- =================================================
+                 CREAR CUENTA
+            ================================================== -->
+
+            <div class="registro-container">
+
+                <p>
+                    ¿No tienes una cuenta?
+                </p>
+
+                <a
+                    href="/registro"
+                    class="btn-crear-cuenta"
+                >
+
+                    CREAR CUENTA
+
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
+                 PIE DEL LOGIN
+            ================================================== -->
+
+            <div class="login-footer">
+
+                <span>
+                    INFINITO 2U
+                </span>
+
+                <span>
+                    Sistema de Gestión de Propiedad Horizontal
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

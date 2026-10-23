@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>INFINITO 2U - Residentes</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/paneles.css') }}">
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #F4F6F8;
+        color: #1E3A5F;
+    }
+
+    /* =====================================================
+       BARRA SUPERIOR
+    ===================================================== */
+
+    .barra-superior {
+        background: #1E3A5F;
+        color: white;
+        min-height: 90px;
+        padding: 15px 35px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .marca {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .marca img {
+        width: 55px;
+        height: 55px;
+        object-fit: contain;
+        border-radius: 10px;
+        background: white;
+    }
+
+    .marca h1 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .marca span {
+        font-size: 12px;
+        opacity: 0.85;
+    }
+
+    .usuario-activo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 14px;
+    }
+
+    .usuario-activo a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border: 1px solid rgba(255,255,255,0.6);
+        padding: 9px 14px;
+        border-radius: 7px;
+    }
+
+    .usuario-activo a:hover {
+        background: white;
+        color: #1E3A5F;
+    }
+
+    /* =====================================================
+       CONTENIDO
+    ===================================================== */
+
+    .contenido {
+        width: 95%;
+        max-width: 1450px;
+        margin: 30px auto;
+    }
+
+    .residentes-contenedor {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* =====================================================
+       ENCABEZADO
+    ===================================================== */
+
+    .bienvenida {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .bienvenida h2 {
+        margin: 0 0 8px 0;
+        font-size: 27px;
+    }
+
+    .bienvenida p {
+        margin: 0;
+        color: #666;
+    }
+
+    /* =====================================================
+       BOTÓN VOLVER
+    ===================================================== */
+
+    .boton-volver {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 11px 18px;
+        background: #1E3A5F;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .boton-volver:hover {
+        background: #17324F;
+    }
+
+    /* =====================================================
+       MENSAJES
+    ===================================================== */
+
+    .mensaje {
+        padding: 14px 18px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        background: #E8F5E9;
+        color: #2E7D32;
+        border-left: 5px solid #3A9D5D;
+        font-weight: bold;
+    }
+
+    /* =====================================================
+       FORMULARIO
+    ===================================================== */
+
+    .formulario-residente {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        margin-bottom: 30px;
+    }
+
+    .formulario-residente h3 {
+        margin-top: 0;
+        color: #1E3A5F;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .campo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .campo label {
+        margin-bottom: 7px;
+        font-weight: bold;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .campo input {
+        padding: 11px;
+        border: 1px solid #CDD4DA;
+        border-radius: 7px;
+        font-size: 14px;
+        outline: none;
+        width: 100%;
+    }
+
+    .campo input:focus {
+        border-color: #2878B5;
+    }
+
+    .campo-completo {
+        grid-column: 1 / -1;
+    }
+
+    .boton-guardar {
+        padding: 12px 22px;
+        border: none;
+        border-radius: 8px;
+        background: #3A9D5D;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .boton-guardar:hover {
+        background: #2F824C;
+    }
+
+    /* =====================================================
+       TABLA
+    ===================================================== */
+
+    .tabla-contenedor {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        overflow-x: auto;
+    }
+
+    .tabla-contenedor h3 {
+        margin-top: 0;
+        color: #1E3A5F;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1000px;
+    }
+
+    th {
+        background: #1E3A5F;
+        color: white;
+        padding: 13px 10px;
+        text-align: left;
+        font-size: 13px;
+    }
+
+    td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #E1E5E8;
+        font-size: 14px;
+    }
+
+    tr:hover td {
+        background: #F7F9FA;
+    }
+
+    /* =====================================================
+       ACCIONES
+    ===================================================== */
+
+    .acciones {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .boton-editar {
+        background: #2878B5;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .boton-editar:hover {
+        background: #1F6295;
+    }
+
+    .boton-eliminar {
+        background: #C94C4C;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .boton-eliminar:hover {
+        background: #A83D3D;
+    }
+
+    /* =====================================================
+       FORMULARIO EDICIÓN
+    ===================================================== */
+
+    .form-edicion {
+        display: none;
+        margin-top: 30px;
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        border-top: 5px solid #2878B5;
+    }
+
+    .form-edicion.mostrar {
+        display: block;
+    }
+
+    .form-edicion h3 {
+        margin-top: 0;
+        color: #2878B5;
+    }
+
+    .botones-edicion {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .boton-cancelar {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        background: #777;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .boton-cancelar:hover {
+        background: #555;
+    }
+
+    /* =====================================================
+       SIN REGISTROS
+    ===================================================== */
+
+    .sin-registros {
+        text-align: center;
+        padding: 35px;
+        color: #777;
+        font-style: italic;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 1000px) {
+
+        .form-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .barra-superior {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .usuario-activo {
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (max-width: 600px) {
+
+        .contenido {
+            width: 92%;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .campo-completo {
+            grid-column: auto;
+        }
+
+        .barra-superior {
+            padding: 15px 20px;
+        }
+
+        .marca h1 {
+            font-size: 20px;
+        }
+
+        .botones-edicion {
+            flex-direction: column;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     BARRA SUPERIOR
+====================================================== -->
+
+<header class="barra-superior">
+
+```
+<div class="marca">
+
+    <img
+        src="{{ url_for('assets', filename='Logo.jpeg') }}"
+        alt="INFINITO 2U"
+    >
+
+    <div>
+
+        <h1>INFINITO 2U</h1>
+
+        <span>
+            GESTIÓN DE RESIDENTES
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="usuario-activo">
+
+    <span>
+        👤 Administrador
+    </span>
+
+    <strong>
+        {{ usuario }}
+    </strong>
+
+    <a href="{{ url_for('logout') }}">
+        CERRAR SESIÓN
+    </a>
+
+</div>
+```
+
+</header>
+
+<!-- =====================================================
+     CONTENIDO
+====================================================== -->
+
+<main class="contenido">
+
+```
+<div class="residentes-contenedor">
+
+
+    <!-- VOLVER -->
+
+    <a
+        href="{{ url_for('panel_admin') }}"
+        class="boton-volver"
+    >
+        ← VOLVER AL PANEL
+    </a>
+
+
+    <!-- ENCABEZADO -->
+
+    <section class="bienvenida">
+
+        <h2>
+            Gestión de Residentes
+        </h2>
+
+        <p>
+            Agrega, consulta, edita y elimina los residentes
+            registrados en INFINITO 2U.
+        </p>
+
+    </section>
+
+
+    <!-- =================================================
+         MENSAJES
+    ================================================== -->
+
+    {% with mensajes = get_flashed_messages() %}
+
+        {% if mensajes %}
+
+            {% for mensaje in mensajes %}
+
+                <div class="mensaje">
+                    {{ mensaje }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <!-- =================================================
+         AGREGAR RESIDENTE
+    ================================================== -->
+
+    <section class="formulario-residente">
+
+        <h3>
+            ➕ Agregar residente
+        </h3>
+
+
+        <form
+            action="{{ url_for('agregar_residente') }}"
+            method="POST"
+        >
+
+            <div class="form-grid">
+
+
+                <div class="campo">
+
+                    <label for="nombre">
+                        Nombre completo *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        placeholder="Nombre completo"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="documento">
+                        Documento *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="documento"
+                        name="documento"
+                        placeholder="Número de documento"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="telefono">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="text"
+                        id="telefono"
+                        name="telefono"
+                        placeholder="Número de teléfono"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="apartamento">
+                        Apartamento
+                    </label>
+
+                    <input
+                        type="text"
+                        id="apartamento"
+                        name="apartamento"
+                        placeholder="Ej: 101"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuario *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Usuario para iniciar sesión"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="contrasena">
+                        Contraseña *
+                    </label>
+
+                    <input
+                        type="password"
+                        id="contrasena"
+                        name="contrasena"
+                        placeholder="Contraseña"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo campo-completo">
+
+                    <button
+                        type="submit"
+                        class="boton-guardar"
+                    >
+                        GUARDAR RESIDENTE
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- =================================================
+         RESIDENTES REGISTRADOS
+    ================================================== -->
+
+    <section class="tabla-contenedor">
+
+        <h3>
+            👥 Residentes registrados
+        </h3>
+
+
+        {% if residentes %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            NOMBRE
+                        </th>
+
+                        <th>
+                            DOCUMENTO
+                        </th>
+
+                        <th>
+                            TELÉFONO
+                        </th>
+
+                        <th>
+                            APARTAMENTO
+                        </th>
+
+                        <th>
+                            USUARIO
+                        </th>
+
+                        <th>
+                            CONTRASEÑA
+                        </th>
+
+                        <th>
+                            ACCIONES
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for residente in residentes %}
+
+                        <tr>
+
+                            <td>
+                                {{ residente['id_residente'] }}
+                            </td>
+
+
+                            <td>
+                                <strong>
+                                    {{ residente['nombre'] or '—' }}
+                                </strong>
+                            </td>
+
+
+                            <td>
+                                {{ residente['documento'] or '—' }}
+                            </td>
+
+
+                            <td>
+                                {{ residente['telefono'] or '—' }}
+                            </td>
+
+
+                            <td>
+                                {{ residente['apartamento'] or '—' }}
+                            </td>
+
+
+                            <td>
+                                {{ residente['usuario'] or '—' }}
+                            </td>
+
+
+                            <td>
+                                <span style="letter-spacing: 2px;">
+                                    ••••••••
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="acciones">
+
+
+                                    <!-- EDITAR -->
+
+                                    <button
+                                        type="button"
+                                        class="boton-editar"
+
+                                        data-id="{{ residente['id_residente'] }}"
+
+                                        data-nombre="{{ residente['nombre'] or '' }}"
+
+                                        data-documento="{{ residente['documento'] or '' }}"
+
+                                        data-telefono="{{ residente['telefono'] or '' }}"
+
+                                        data-apartamento="{{ residente['apartamento'] or '' }}"
+
+                                        data-usuario="{{ residente['usuario'] or '' }}"
+
+                                        data-contrasena="{{ residente['contrasena'] or '' }}"
+
+                                        onclick="mostrarEdicionDesdeBoton(this)"
+                                    >
+                                        EDITAR
+                                    </button>
+
+
+                                    <!-- ELIMINAR -->
+
+                                    <form
+                                        action="{{ url_for(
+                                            'eliminar_residente',
+                                            id_residente=residente['id_residente']
+                                        ) }}"
+                                        method="POST"
+                                        onsubmit="return confirmarEliminacion();"
+                                        style="display:inline;"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="boton-eliminar"
+                                        >
+                                            ELIMINAR
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+        {% else %}
+
+            <div class="sin-registros">
+
+                No hay residentes registrados.
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- =================================================
+         FORMULARIO DE EDICIÓN
+    ================================================== -->
+
+    <section
+        id="formEdicion"
+        class="form-edicion"
+    >
+
+        <h3>
+            ✏️ Editar residente
+        </h3>
+
+
+        <form
+            id="formularioEdicion"
+            method="POST"
+        >
+
+            <div class="form-grid">
+
+
+                <div class="campo">
+
+                    <label for="editarNombre">
+                        Nombre completo *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarNombre"
+                        name="nombre"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="editarDocumento">
+                        Documento *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarDocumento"
+                        name="documento"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="editarTelefono">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarTelefono"
+                        name="telefono"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="editarApartamento">
+                        Apartamento
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarApartamento"
+                        name="apartamento"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="editarUsuario">
+                        Usuario *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarUsuario"
+                        name="usuario"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="editarContrasena">
+                        Contraseña *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarContrasena"
+                        name="contrasena"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo campo-completo">
+
+                    <div class="botones-edicion">
+
+                        <button
+                            type="submit"
+                            class="boton-guardar"
+                        >
+                            GUARDAR CAMBIOS
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="boton-cancelar"
+                            onclick="cerrarEdicion()"
+                        >
+                            CANCELAR
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+```
+
+</main>
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    function mostrarEdicionDesdeBoton(boton) {
+
+        const id =
+            boton.dataset.id;
+
+        const nombre =
+            boton.dataset.nombre;
+
+        const documento =
+            boton.dataset.documento;
+
+        const telefono =
+            boton.dataset.telefono;
+
+        const apartamento =
+            boton.dataset.apartamento;
+
+        const usuario =
+            boton.dataset.usuario;
+
+        const contrasena =
+            boton.dataset.contrasena;
+
+
+        document
+            .getElementById("formEdicion")
+            .classList
+            .add("mostrar");
+
+
+        document.getElementById(
+            "editarNombre"
+        ).value = nombre;
+
+
+        document.getElementById(
+            "editarDocumento"
+        ).value = documento;
+
+
+        document.getElementById(
+            "editarTelefono"
+        ).value = telefono;
+
+
+        document.getElementById(
+            "editarApartamento"
+        ).value = apartamento;
+
+
+        document.getElementById(
+            "editarUsuario"
+        ).value = usuario;
+
+
+        document.getElementById(
+            "editarContrasena"
+        ).value = contrasena;
+
+
+        document.getElementById(
+            "formularioEdicion"
+        ).action =
+            "/residentes/editar/" +
+            encodeURIComponent(id);
+
+
+        document
+            .getElementById("formEdicion")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    }
+
+
+    function cerrarEdicion() {
+
+        document
+            .getElementById("formEdicion")
+            .classList
+            .remove("mostrar");
+
+    }
+
+
+    function confirmarEliminacion() {
+
+        return confirm(
+            "¿Está seguro de eliminar este residente?"
+        );
+
+    }
+
+</script>
+
+</body>
+
+</html>
