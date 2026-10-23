@@ -50,12 +50,12 @@ CARPETA_NORMATIVIDAD = os.path.join(
 
 CARPETA_MANUAL_CONVIVENCIA = os.path.join(
     CARPETA_ASSETS,
-    "manual de convivencia"
+    "Manual de convivencia"
 )
 
 CARPETA_MANUAL_JURIDICO = os.path.join(
     CARPETA_ASSETS,
-    "manual juridico"
+    "Manual juridico"
 )
 
 
